@@ -1,0 +1,42 @@
+{
+  "name": "connectguard",
+  "version": "0.1.0",
+  "description": "Offline-first train-to-train connection planner for Indian Railway passengers",
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
+    "import:timetable": "node scripts/import-timetable.mjs"
+  },
+  "private": true,
+  "dependencies": {
+    "expo": "~57.0.34",
+    "expo-constants": "~57.0.25",
+    "expo-linking": "~57.0.14",
+    "expo-localization": "~57.0.2",
+    "expo-router": "~57.0.32",
+    "expo-sqlite": "~57.0.6",
+    "expo-status-bar": "~57.0.1",
+    "i18next": "^27.2.7",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-i18next": "^18.0.3",
+    "react-native": "0.86.3",
+    "react-native-reanimated": "4.5.1",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "~4.26.0",
+    "react-native-worklets": "0.10.1",
+    "zustand": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/react": "~19.2.4",
+    "jest": "~29.7.0",
+    "jest-expo": "~57.0.6",
+    "typescript": "~5.9.3"
+  }
+}

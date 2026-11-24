@@ -1,0 +1,11 @@
+node_modules/
+.expo/
+dist/
+web-build/
+*.db
+*.db-wal
+*.db-shm
+.DS_Store
+Thumbs.db
+npm-debug.*
+yarn-error.*

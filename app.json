@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "ConnectGuard",
+    "slug": "connectguard",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "connectguard",
+    "userInterfaceStyle": "light",
+    "android": {
+      "package": "com.connectguard.app"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-localization",
+      "expo-sqlite"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
