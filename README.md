@@ -1,10 +1,10 @@
 # ConnectGuard (Phase 1)
 
-Offline-first train-to-train 1-stop connection planner for Indian Railway passengers travelling on two separate tickets. Built with React Native + Expo SDK 57, TypeScript (strict), Expo Router, `expo-sqlite`, Zustand, and English/Hindi i18n.
+Offline-first train-to-train 1-stop connection planner for Indian Railway passengers travelling on two separate tickets. Built with React Native + Expo SDK 58, TypeScript (strict), Expo Router, `expo-sqlite`, Zustand, and English/Hindi i18n.
 
 > **Disclaimer:** ConnectGuard does not book tickets, show seat availability, track coach positions, or replace RailOne / IRCTC / NTES. All connection ratings are rule-based schedule estimates, never probabilities or live delay status.
 
-## Setup (Expo Go — SDK 57)
+## Setup (Expo Go — SDK 58)
 
 1. Install dependencies:
    ```bash
@@ -19,7 +19,7 @@ Offline-first train-to-train 1-stop connection planner for Indian Railway passen
    ```bash
    npx expo start
    ```
-   Scan the QR code with **Expo Go (SDK 57)** on Android/iOS. Works offline once loaded.
+   Scan the QR code with **Expo Go (SDK 58)** on Android/iOS. Works offline once loaded.
 
 ## What Phase 1 Includes
 
