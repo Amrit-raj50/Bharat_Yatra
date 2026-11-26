@@ -1,13 +1,5 @@
-import React, { useState } from 'react';
-import {
-  ActivityIndicator,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import React from 'react';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useAppStore } from '@/state/useAppStore';
 
@@ -16,41 +8,14 @@ export default function SettingsScreen(): React.ReactElement {
   const {
     language,
     bufferProfile,
-    apiBaseUrl,
-    dataSource,
     datasetMeta,
     datasetStats,
-    syncStatus,
-    syncMessage,
     setLanguage,
     setBufferProfile,
-    setApiBaseUrl,
-    importFromUrl,
-    importFromJsonText,
-    resetToDefaultDataset,
-    clearSyncStatus,
   } = useAppStore();
 
-  const [apiInput, setApiInput] = useState(apiBaseUrl);
-  const [urlInput, setUrlInput] = useState(`${apiBaseUrl}/api/timetable`);
-  const [jsonInput, setJsonInput] = useState('');
-
-  const handleSyncUrl = async () => {
-    await importFromUrl(urlInput);
-  };
-
-  const handleImportJson = () => {
-    if (!jsonInput.trim()) {
-      return;
-    }
-    const ok = importFromJsonText(jsonInput);
-    if (ok) {
-      setJsonInput('');
-    }
-  };
-
   return (
-    <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
+    <ScrollView contentContainerStyle={styles.content}>
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>{t('settings.languageSection')}</Text>
         <View style={styles.langRow}>
@@ -101,42 +66,7 @@ export default function SettingsScreen(): React.ReactElement {
       </View>
 
       <View style={styles.card}>
-        <Text style={styles.sectionTitle}>{t('settings.apiSection')}</Text>
-        <Text style={styles.helperText}>
-          {dataSource === 'ONLINE_API'
-            ? t('settings.apiStatusOnline')
-            : t('settings.apiStatusOffline')}
-        </Text>
-        <TextInput
-          style={styles.input}
-          value={apiInput}
-          onChangeText={setApiInput}
-          placeholder="https://bharat-yatra-1bdr.onrender.com"
-          placeholderTextColor="#64748B"
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="url"
-        />
-        <Pressable
-          style={styles.primaryButton}
-          onPress={() => setApiBaseUrl(apiInput)}
-          accessibilityRole="button"
-        >
-          <Text style={styles.primaryButtonText}>{t('settings.saveApiButton')}</Text>
-        </Pressable>
-      </View>
-
-      <View style={styles.card}>
         <Text style={styles.sectionTitle}>{t('settings.dataSection')}</Text>
-
-        <View style={styles.infoRow}>
-          <Text style={styles.infoLabel}>{t('settings.datasetKind')}</Text>
-          <Text style={styles.infoValue}>
-            {datasetMeta.datasetKind === 'SAMPLE'
-              ? t('settings.datasetKindSample')
-              : t('settings.datasetKindImported')}
-          </Text>
-        </View>
 
         <View style={styles.infoRow}>
           <Text style={styles.infoLabel}>{t('settings.dataVersion')}</Text>
@@ -161,93 +91,7 @@ export default function SettingsScreen(): React.ReactElement {
             <Text style={styles.statNum}>{datasetStats.stops}</Text>
             <Text style={styles.statLabel}>{t('settings.statStops')}</Text>
           </View>
-          <View style={styles.statBox}>
-            <Text style={styles.statNum}>{datasetStats.clusters}</Text>
-            <Text style={styles.statLabel}>{t('settings.statClusters')}</Text>
-          </View>
-          <View style={styles.statBox}>
-            <Text style={styles.statNum}>{datasetStats.transfers}</Text>
-            <Text style={styles.statLabel}>{t('settings.statTransfers')}</Text>
-          </View>
         </View>
-      </View>
-
-      <View style={styles.card}>
-        <Text style={styles.sectionTitle}>{t('settings.syncSection')}</Text>
-        <Text style={styles.helperText}>{t('settings.syncHelper')}</Text>
-
-        <TextInput
-          style={styles.input}
-          value={urlInput}
-          onChangeText={(val) => {
-            setUrlInput(val);
-            if (syncStatus !== 'idle') clearSyncStatus();
-          }}
-          placeholder={t('settings.urlPlaceholder')}
-          placeholderTextColor="#64748B"
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="url"
-        />
-        <Pressable
-          style={[styles.primaryButton, syncStatus === 'loading' && styles.buttonDisabled]}
-          onPress={() => void handleSyncUrl()}
-          disabled={syncStatus === 'loading'}
-          accessibilityRole="button"
-        >
-          {syncStatus === 'loading' ? (
-            <ActivityIndicator color="#FFFFFF" />
-          ) : (
-            <Text style={styles.primaryButtonText}>{t('settings.syncUrlButton')}</Text>
-          )}
-        </Pressable>
-
-        <Text style={[styles.helperText, styles.jsonLabel]}>{t('settings.pasteJsonLabel')}</Text>
-        <TextInput
-          style={[styles.input, styles.jsonInput]}
-          value={jsonInput}
-          onChangeText={(val) => {
-            setJsonInput(val);
-            if (syncStatus !== 'idle') clearSyncStatus();
-          }}
-          placeholder={t('settings.jsonPlaceholder')}
-          placeholderTextColor="#64748B"
-          multiline
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
-        <View style={styles.actionRow}>
-          <Pressable
-            style={[styles.secondaryButton, !jsonInput.trim() && styles.buttonDisabled]}
-            onPress={handleImportJson}
-            disabled={!jsonInput.trim() || syncStatus === 'loading'}
-            accessibilityRole="button"
-          >
-            <Text style={styles.secondaryButtonText}>{t('settings.importJsonButton')}</Text>
-          </Pressable>
-          <Pressable
-            style={styles.resetButton}
-            onPress={resetToDefaultDataset}
-            disabled={syncStatus === 'loading'}
-            accessibilityRole="button"
-          >
-            <Text style={styles.resetButtonText}>{t('settings.resetDatasetButton')}</Text>
-          </Pressable>
-        </View>
-
-        {syncStatus === 'success' && syncMessage ? (
-          <View style={styles.successBox}>
-            <Text style={styles.successText}>
-              {t('settings.syncSuccess', { summary: syncMessage })}
-            </Text>
-          </View>
-        ) : null}
-
-        {syncStatus === 'error' && syncMessage ? (
-          <View style={styles.errorBox}>
-            <Text style={styles.errorText}>{syncMessage}</Text>
-          </View>
-        ) : null}
       </View>
 
       <View style={styles.card}>
@@ -358,111 +202,14 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     marginBottom: 10,
   },
-  jsonLabel: {
-    marginTop: 14,
-    marginBottom: 6,
-  },
-  input: {
-    backgroundColor: '#F8FAFC',
-    borderColor: '#CBD5E1',
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-    minHeight: 44,
-    fontSize: 14,
-    color: '#0F172A',
-    marginBottom: 10,
-  },
-  jsonInput: {
-    minHeight: 84,
-    textAlignVertical: 'top',
-  },
-  primaryButton: {
-    backgroundColor: '#1D4ED8',
-    borderRadius: 10,
-    minHeight: 46,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  primaryButtonText: {
-    color: '#FFFFFF',
-    fontSize: 14,
-    fontWeight: '700',
-  },
-  actionRow: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  secondaryButton: {
-    flex: 1,
-    backgroundColor: '#EFF6FF',
-    borderColor: '#93C5FD',
-    borderWidth: 1,
-    borderRadius: 10,
-    minHeight: 44,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-  },
-  secondaryButtonText: {
-    color: '#1E40AF',
-    fontSize: 13,
-    fontWeight: '700',
-  },
-  resetButton: {
-    flex: 1,
-    backgroundColor: '#F1F5F9',
-    borderColor: '#CBD5E1',
-    borderWidth: 1,
-    borderRadius: 10,
-    minHeight: 44,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-  },
-  resetButtonText: {
-    color: '#334155',
-    fontSize: 13,
-    fontWeight: '700',
-  },
-  buttonDisabled: {
-    opacity: 0.5,
-  },
-  successBox: {
-    backgroundColor: '#DCFCE7',
-    borderColor: '#16A34A',
-    borderWidth: 1,
-    borderRadius: 8,
-    padding: 10,
-    marginTop: 12,
-  },
-  successText: {
-    color: '#166534',
-    fontSize: 13,
-    fontWeight: '600',
-  },
-  errorBox: {
-    backgroundColor: '#FEE2E2',
-    borderColor: '#DC2626',
-    borderWidth: 1,
-    borderRadius: 8,
-    padding: 10,
-    marginTop: 12,
-  },
-  errorText: {
-    color: '#991B1B',
-    fontSize: 13,
-  },
   bodyText: {
     fontSize: 14,
+    color: '#334155',
     lineHeight: 20,
-    color: '#1E293B',
+    marginBottom: 8,
   },
   disclaimer: {
     fontSize: 12,
-    fontWeight: '600',
-    color: '#92400E',
-    marginTop: 10,
+    color: '#64748B',
   },
 });
