@@ -1,0 +1,19 @@
+{
+  "name": "connectguard-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test backend.test.mjs",
+    "ingest:railkit": "node ingest/import-railkit.mjs",
+    "ingest:datameet": "node ingest/import-datameet.mjs"
+  },
+  "dependencies": {
+    "mongodb": "^7.9.1",
+    "railkit": "latest"
+  }
+}

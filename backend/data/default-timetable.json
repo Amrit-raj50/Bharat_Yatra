@@ -1,0 +1,3113 @@
+{
+  "meta": {
+    "datasetKind": "SAMPLE",
+    "dataVersion": "2026.11-IN-REF",
+    "lastUpdated": "2026-11-25"
+  },
+  "cityClusters": [
+    {
+      "id": "DELHI_NCR",
+      "name": "Delhi NCR"
+    },
+    {
+      "id": "MUMBAI_MMR",
+      "name": "Mumbai MMR"
+    },
+    {
+      "id": "KOLKATA",
+      "name": "Kolkata"
+    },
+    {
+      "id": "CHENNAI",
+      "name": "Chennai"
+    },
+    {
+      "id": "BENGALURU",
+      "name": "Bengaluru"
+    },
+    {
+      "id": "HYDERABAD",
+      "name": "Hyderabad"
+    }
+  ],
+  "stations": [
+    {
+      "code": "NDLS",
+      "name": "New Delhi",
+      "city": "Delhi",
+      "lat": 28.6419,
+      "lng": 77.2194,
+      "cityClusterId": "DELHI_NCR"
+    },
+    {
+      "code": "NZM",
+      "name": "Hazrat Nizamuddin",
+      "city": "Delhi",
+      "lat": 28.5889,
+      "lng": 77.2535,
+      "cityClusterId": "DELHI_NCR"
+    },
+    {
+      "code": "ANVT",
+      "name": "Anand Vihar Terminal",
+      "city": "Delhi",
+      "lat": 28.6486,
+      "lng": 77.3156,
+      "cityClusterId": "DELHI_NCR"
+    },
+    {
+      "code": "DLI",
+      "name": "Old Delhi Junction",
+      "city": "Delhi",
+      "lat": 28.6619,
+      "lng": 77.2274,
+      "cityClusterId": "DELHI_NCR"
+    },
+    {
+      "code": "DEE",
+      "name": "Delhi Sarai Rohilla",
+      "city": "Delhi",
+      "lat": 28.6626,
+      "lng": 77.1843,
+      "cityClusterId": "DELHI_NCR"
+    },
+    {
+      "code": "CSMT",
+      "name": "Mumbai CSMT",
+      "city": "Mumbai",
+      "lat": 18.9398,
+      "lng": 72.8355,
+      "cityClusterId": "MUMBAI_MMR"
+    },
+    {
+      "code": "LTT",
+      "name": "Lokmanya Tilak Terminus",
+      "city": "Mumbai",
+      "lat": 19.0689,
+      "lng": 72.8919,
+      "cityClusterId": "MUMBAI_MMR"
+    },
+    {
+      "code": "MMCT",
+      "name": "Mumbai Central",
+      "city": "Mumbai",
+      "lat": 18.9696,
+      "lng": 72.8193,
+      "cityClusterId": "MUMBAI_MMR"
+    },
+    {
+      "code": "BDTS",
+      "name": "Bandra Terminus",
+      "city": "Mumbai",
+      "lat": 19.0626,
+      "lng": 72.8408,
+      "cityClusterId": "MUMBAI_MMR"
+    },
+    {
+      "code": "HWH",
+      "name": "Howrah Junction",
+      "city": "Kolkata",
+      "lat": 22.5839,
+      "lng": 88.3426,
+      "cityClusterId": "KOLKATA"
+    },
+    {
+      "code": "SDAH",
+      "name": "Sealdah",
+      "city": "Kolkata",
+      "lat": 22.5673,
+      "lng": 88.3705,
+      "cityClusterId": "KOLKATA"
+    },
+    {
+      "code": "KOAA",
+      "name": "Kolkata Terminal",
+      "city": "Kolkata",
+      "lat": 22.6014,
+      "lng": 88.3834,
+      "cityClusterId": "KOLKATA"
+    },
+    {
+      "code": "MAS",
+      "name": "MGR Chennai Central",
+      "city": "Chennai",
+      "lat": 13.0827,
+      "lng": 80.2757,
+      "cityClusterId": "CHENNAI"
+    },
+    {
+      "code": "MS",
+      "name": "Chennai Egmore",
+      "city": "Chennai",
+      "lat": 13.0732,
+      "lng": 80.2614,
+      "cityClusterId": "CHENNAI"
+    },
+    {
+      "code": "SBC",
+      "name": "KSR Bengaluru City",
+      "city": "Bengaluru",
+      "lat": 12.9781,
+      "lng": 77.5697,
+      "cityClusterId": "BENGALURU"
+    },
+    {
+      "code": "YPR",
+      "name": "Yesvantpur Junction",
+      "city": "Bengaluru",
+      "lat": 13.0238,
+      "lng": 77.5504,
+      "cityClusterId": "BENGALURU"
+    },
+    {
+      "code": "SMVB",
+      "name": "SMVT Bengaluru",
+      "city": "Bengaluru",
+      "lat": 13.0059,
+      "lng": 77.6484,
+      "cityClusterId": "BENGALURU"
+    },
+    {
+      "code": "SC",
+      "name": "Secunderabad Junction",
+      "city": "Hyderabad",
+      "lat": 17.4344,
+      "lng": 78.5013,
+      "cityClusterId": "HYDERABAD"
+    },
+    {
+      "code": "HYB",
+      "name": "Hyderabad Deccan",
+      "city": "Hyderabad",
+      "lat": 17.3919,
+      "lng": 78.4673,
+      "cityClusterId": "HYDERABAD"
+    },
+    {
+      "code": "KCG",
+      "name": "Kacheguda",
+      "city": "Hyderabad",
+      "lat": 17.3886,
+      "lng": 78.4979,
+      "cityClusterId": "HYDERABAD"
+    },
+    {
+      "code": "LKO",
+      "name": "Lucknow Charbagh",
+      "city": "Lucknow",
+      "lat": 26.8318,
+      "lng": 80.9191,
+      "cityClusterId": null
+    },
+    {
+      "code": "CNB",
+      "name": "Kanpur Central",
+      "city": "Kanpur",
+      "lat": 26.4539,
+      "lng": 80.3511,
+      "cityClusterId": null
+    },
+    {
+      "code": "PRYJ",
+      "name": "Prayagraj Junction",
+      "city": "Prayagraj",
+      "lat": 25.4469,
+      "lng": 81.8295,
+      "cityClusterId": null
+    },
+    {
+      "code": "BSB",
+      "name": "Varanasi Junction",
+      "city": "Varanasi",
+      "lat": 25.3272,
+      "lng": 82.9854,
+      "cityClusterId": null
+    },
+    {
+      "code": "AGC",
+      "name": "Agra Cantt",
+      "city": "Agra",
+      "lat": 27.1583,
+      "lng": 77.9897,
+      "cityClusterId": null
+    },
+    {
+      "code": "CDG",
+      "name": "Chandigarh Junction",
+      "city": "Chandigarh",
+      "lat": 30.7016,
+      "lng": 76.8214,
+      "cityClusterId": null
+    },
+    {
+      "code": "ASR",
+      "name": "Amritsar Junction",
+      "city": "Amritsar",
+      "lat": 31.6331,
+      "lng": 74.8675,
+      "cityClusterId": null
+    },
+    {
+      "code": "JAT",
+      "name": "Jammu Tawi",
+      "city": "Jammu",
+      "lat": 32.7069,
+      "lng": 74.8813,
+      "cityClusterId": null
+    },
+    {
+      "code": "DDN",
+      "name": "Dehradun",
+      "city": "Dehradun",
+      "lat": 30.3143,
+      "lng": 78.0332,
+      "cityClusterId": null
+    },
+    {
+      "code": "PNBE",
+      "name": "Patna Junction",
+      "city": "Patna",
+      "lat": 25.6031,
+      "lng": 85.1376,
+      "cityClusterId": null
+    },
+    {
+      "code": "DDU",
+      "name": "Pt. DD Upadhyaya Jn",
+      "city": "Mughalsarai",
+      "lat": 25.2804,
+      "lng": 83.1194,
+      "cityClusterId": null
+    },
+    {
+      "code": "GAYA",
+      "name": "Gaya Junction",
+      "city": "Gaya",
+      "lat": 24.8035,
+      "lng": 84.9994,
+      "cityClusterId": null
+    },
+    {
+      "code": "RNC",
+      "name": "Ranchi Junction",
+      "city": "Ranchi",
+      "lat": 23.3526,
+      "lng": 85.3418,
+      "cityClusterId": null
+    },
+    {
+      "code": "BBS",
+      "name": "Bhubaneswar",
+      "city": "Bhubaneswar",
+      "lat": 20.2665,
+      "lng": 85.8435,
+      "cityClusterId": null
+    },
+    {
+      "code": "NJP",
+      "name": "New Jalpaiguri",
+      "city": "Siliguri",
+      "lat": 26.6836,
+      "lng": 88.4426,
+      "cityClusterId": null
+    },
+    {
+      "code": "GHY",
+      "name": "Guwahati",
+      "city": "Guwahati",
+      "lat": 26.1822,
+      "lng": 91.7506,
+      "cityClusterId": null
+    },
+    {
+      "code": "JP",
+      "name": "Jaipur Junction",
+      "city": "Jaipur",
+      "lat": 26.9196,
+      "lng": 75.7878,
+      "cityClusterId": null
+    },
+    {
+      "code": "JU",
+      "name": "Jodhpur Junction",
+      "city": "Jodhpur",
+      "lat": 26.2838,
+      "lng": 73.0223,
+      "cityClusterId": null
+    },
+    {
+      "code": "ADI",
+      "name": "Ahmedabad Junction",
+      "city": "Ahmedabad",
+      "lat": 23.0265,
+      "lng": 72.6008,
+      "cityClusterId": null
+    },
+    {
+      "code": "BRC",
+      "name": "Vadodara Junction",
+      "city": "Vadodara",
+      "lat": 22.3106,
+      "lng": 73.1812,
+      "cityClusterId": null
+    },
+    {
+      "code": "ST",
+      "name": "Surat",
+      "city": "Surat",
+      "lat": 21.2049,
+      "lng": 72.8409,
+      "cityClusterId": null
+    },
+    {
+      "code": "PUNE",
+      "name": "Pune Junction",
+      "city": "Pune",
+      "lat": 18.5289,
+      "lng": 73.8744,
+      "cityClusterId": null
+    },
+    {
+      "code": "GWL",
+      "name": "Gwalior Junction",
+      "city": "Gwalior",
+      "lat": 26.2144,
+      "lng": 78.1797,
+      "cityClusterId": null
+    },
+    {
+      "code": "VGLJ",
+      "name": "Virangana Lakshmibai Jhansi",
+      "city": "Jhansi",
+      "lat": 25.4484,
+      "lng": 78.5542,
+      "cityClusterId": null
+    },
+    {
+      "code": "BPL",
+      "name": "Bhopal Junction",
+      "city": "Bhopal",
+      "lat": 23.2683,
+      "lng": 77.4131,
+      "cityClusterId": null
+    },
+    {
+      "code": "NGP",
+      "name": "Nagpur Junction",
+      "city": "Nagpur",
+      "lat": 21.1525,
+      "lng": 79.0882,
+      "cityClusterId": null
+    },
+    {
+      "code": "VSKP",
+      "name": "Visakhapatnam",
+      "city": "Visakhapatnam",
+      "lat": 17.7219,
+      "lng": 83.2899,
+      "cityClusterId": null
+    },
+    {
+      "code": "BZA",
+      "name": "Vijayawada Junction",
+      "city": "Vijayawada",
+      "lat": 16.5186,
+      "lng": 80.6199,
+      "cityClusterId": null
+    },
+    {
+      "code": "CBE",
+      "name": "Coimbatore Junction",
+      "city": "Coimbatore",
+      "lat": 10.9971,
+      "lng": 76.9668,
+      "cityClusterId": null
+    },
+    {
+      "code": "ERS",
+      "name": "Ernakulam Junction",
+      "city": "Kochi",
+      "lat": 9.9693,
+      "lng": 76.2908,
+      "cityClusterId": null
+    },
+    {
+      "code": "TVC",
+      "name": "Thiruvananthapuram Central",
+      "city": "Thiruvananthapuram",
+      "lat": 8.4875,
+      "lng": 76.9525,
+      "cityClusterId": null
+    },
+    {
+      "code": "MAO",
+      "name": "Madgaon Junction",
+      "city": "Goa",
+      "lat": 15.2685,
+      "lng": 73.9721,
+      "cityClusterId": null
+    }
+  ],
+  "trains": [
+    {
+      "number": "12419",
+      "name": "Gomti Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12229",
+      "name": "Lucknow Mail",
+      "runningDays": 127
+    },
+    {
+      "number": "12003",
+      "name": "Lucknow Swarna Shatabdi",
+      "runningDays": 127
+    },
+    {
+      "number": "12417",
+      "name": "Prayagraj Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12559",
+      "name": "Shiv Ganga Express",
+      "runningDays": 127
+    },
+    {
+      "number": "22435",
+      "name": "Varanasi Vande Bharat",
+      "runningDays": 123
+    },
+    {
+      "number": "12005",
+      "name": "Kalka-Delhi Shatabdi",
+      "runningDays": 127
+    },
+    {
+      "number": "12013",
+      "name": "Amritsar Shatabdi",
+      "runningDays": 127
+    },
+    {
+      "number": "12425",
+      "name": "Jammu Rajdhani",
+      "runningDays": 127
+    },
+    {
+      "number": "12017",
+      "name": "Dehradun Shatabdi",
+      "runningDays": 127
+    },
+    {
+      "number": "12309",
+      "name": "Patna Rajdhani",
+      "runningDays": 127
+    },
+    {
+      "number": "12393",
+      "name": "Sampoorna Kranti Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12301",
+      "name": "Howrah Rajdhani",
+      "runningDays": 127
+    },
+    {
+      "number": "12313",
+      "name": "Sealdah Rajdhani",
+      "runningDays": 127
+    },
+    {
+      "number": "12423",
+      "name": "Dibrugarh-NDLS Rajdhani",
+      "runningDays": 127
+    },
+    {
+      "number": "12505",
+      "name": "North East Express",
+      "runningDays": 127
+    },
+    {
+      "number": "22823",
+      "name": "Bhubaneswar Rajdhani",
+      "runningDays": 9
+    },
+    {
+      "number": "12453",
+      "name": "Ranchi Rajdhani",
+      "runningDays": 18
+    },
+    {
+      "number": "12015",
+      "name": "Ajmer Shatabdi",
+      "runningDays": 127
+    },
+    {
+      "number": "12985",
+      "name": "Jaipur Double Decker",
+      "runningDays": 127
+    },
+    {
+      "number": "12414",
+      "name": "Pooja Superfast Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12461",
+      "name": "Mandore Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12957",
+      "name": "Swarna Jayanti Rajdhani",
+      "runningDays": 127
+    },
+    {
+      "number": "12915",
+      "name": "Ashram Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12951",
+      "name": "Mumbai Tejas Rajdhani",
+      "runningDays": 127
+    },
+    {
+      "number": "12953",
+      "name": "August Kranti Rajdhani",
+      "runningDays": 127
+    },
+    {
+      "number": "12903",
+      "name": "Golden Temple Mail",
+      "runningDays": 127
+    },
+    {
+      "number": "12263",
+      "name": "Pune-NZM Duronto",
+      "runningDays": 42
+    },
+    {
+      "number": "12002",
+      "name": "Bhopal Shatabdi",
+      "runningDays": 127
+    },
+    {
+      "number": "12155",
+      "name": "Bhopal Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12621",
+      "name": "Tamil Nadu Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12433",
+      "name": "Chennai Rajdhani",
+      "runningDays": 21
+    },
+    {
+      "number": "12723",
+      "name": "Telangana Express",
+      "runningDays": 127
+    },
+    {
+      "number": "22691",
+      "name": "Bengaluru Rajdhani",
+      "runningDays": 127
+    },
+    {
+      "number": "12625",
+      "name": "Kerala Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12431",
+      "name": "Trivandrum Rajdhani",
+      "runningDays": 42
+    },
+    {
+      "number": "12123",
+      "name": "Deccan Queen",
+      "runningDays": 127
+    },
+    {
+      "number": "12127",
+      "name": "Mumbai-Pune Intercity",
+      "runningDays": 127
+    },
+    {
+      "number": "12009",
+      "name": "Ahmedabad Shatabdi",
+      "runningDays": 63
+    },
+    {
+      "number": "12901",
+      "name": "Gujarat Mail",
+      "runningDays": 127
+    },
+    {
+      "number": "12101",
+      "name": "Jnaneswari Express",
+      "runningDays": 21
+    },
+    {
+      "number": "12261",
+      "name": "Howrah Duronto",
+      "runningDays": 42
+    },
+    {
+      "number": "11301",
+      "name": "Udyan Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12163",
+      "name": "Chennai Express",
+      "runningDays": 127
+    },
+    {
+      "number": "10103",
+      "name": "Mandovi Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12701",
+      "name": "Hussainsagar Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12839",
+      "name": "Howrah-Chennai Mail",
+      "runningDays": 127
+    },
+    {
+      "number": "12841",
+      "name": "Coromandel Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12245",
+      "name": "Howrah-SMVB Duronto",
+      "runningDays": 127
+    },
+    {
+      "number": "12860",
+      "name": "Gitanjali Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12510",
+      "name": "Guwahati-SMVB Express",
+      "runningDays": 96
+    },
+    {
+      "number": "12007",
+      "name": "Mysuru Shatabdi",
+      "runningDays": 123
+    },
+    {
+      "number": "12607",
+      "name": "Lalbagh Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12677",
+      "name": "Ernakulam Intercity",
+      "runningDays": 127
+    },
+    {
+      "number": "12759",
+      "name": "Charminar Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12785",
+      "name": "Kacheguda-SBC Express",
+      "runningDays": 127
+    },
+    {
+      "number": "12213",
+      "name": "YPR-DEE Duronto",
+      "runningDays": 96
+    },
+    {
+      "number": "12952",
+      "name": "NDLS-Mumbai Tejas Rajdhani",
+      "runningDays": 127
+    },
+    {
+      "number": "12958",
+      "name": "NDLS-ADI Swarna Jayanti Rajdhani",
+      "runningDays": 127
+    },
+    {
+      "number": "12310",
+      "name": "NDLS-Patna Rajdhani",
+      "runningDays": 127
+    },
+    {
+      "number": "12302",
+      "name": "NDLS-Howrah Rajdhani",
+      "runningDays": 127
+    },
+    {
+      "number": "12622",
+      "name": "NDLS-Chennai Tamil Nadu Exp",
+      "runningDays": 127
+    },
+    {
+      "number": "22692",
+      "name": "NZM-Bengaluru Rajdhani",
+      "runningDays": 127
+    },
+    {
+      "number": "12424",
+      "name": "NDLS-Dibrugarh Rajdhani",
+      "runningDays": 127
+    }
+  ],
+  "trainStops": [
+    {
+      "trainNumber": "12419",
+      "stationCode": "LKO",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 345,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12419",
+      "stationCode": "CNB",
+      "sequence": 2,
+      "arrivalMinutes": 440,
+      "departureMinutes": 445,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12419",
+      "stationCode": "NDLS",
+      "sequence": 3,
+      "arrivalMinutes": 795,
+      "departureMinutes": null,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12229",
+      "stationCode": "LKO",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1320,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12229",
+      "stationCode": "NDLS",
+      "sequence": 2,
+      "arrivalMinutes": 415,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12003",
+      "stationCode": "LKO",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 935,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12003",
+      "stationCode": "CNB",
+      "sequence": 2,
+      "arrivalMinutes": 1010,
+      "departureMinutes": 1015,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12003",
+      "stationCode": "NDLS",
+      "sequence": 3,
+      "arrivalMinutes": 1345,
+      "departureMinutes": null,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12417",
+      "stationCode": "PRYJ",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1330,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12417",
+      "stationCode": "CNB",
+      "sequence": 2,
+      "arrivalMinutes": 35,
+      "departureMinutes": 40,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12417",
+      "stationCode": "NDLS",
+      "sequence": 3,
+      "arrivalMinutes": 420,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12559",
+      "stationCode": "BSB",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1335,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12559",
+      "stationCode": "PRYJ",
+      "sequence": 2,
+      "arrivalMinutes": 30,
+      "departureMinutes": 35,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12559",
+      "stationCode": "CNB",
+      "sequence": 3,
+      "arrivalMinutes": 165,
+      "departureMinutes": 170,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12559",
+      "stationCode": "NDLS",
+      "sequence": 4,
+      "arrivalMinutes": 505,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "22435",
+      "stationCode": "BSB",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 900,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "22435",
+      "stationCode": "PRYJ",
+      "sequence": 2,
+      "arrivalMinutes": 990,
+      "departureMinutes": 992,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "22435",
+      "stationCode": "CNB",
+      "sequence": 3,
+      "arrivalMinutes": 1110,
+      "departureMinutes": 1112,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "22435",
+      "stationCode": "NDLS",
+      "sequence": 4,
+      "arrivalMinutes": 1380,
+      "departureMinutes": null,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12005",
+      "stationCode": "NDLS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1035,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12005",
+      "stationCode": "CDG",
+      "sequence": 2,
+      "arrivalMinutes": 1230,
+      "departureMinutes": null,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12013",
+      "stationCode": "NDLS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 990,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12013",
+      "stationCode": "ASR",
+      "sequence": 2,
+      "arrivalMinutes": 1355,
+      "departureMinutes": null,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12425",
+      "stationCode": "NDLS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1240,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12425",
+      "stationCode": "JAT",
+      "sequence": 2,
+      "arrivalMinutes": 300,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12017",
+      "stationCode": "NDLS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 405,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12017",
+      "stationCode": "DDN",
+      "sequence": 2,
+      "arrivalMinutes": 775,
+      "departureMinutes": null,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12309",
+      "stationCode": "PNBE",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1150,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12309",
+      "stationCode": "DDU",
+      "sequence": 2,
+      "arrivalMinutes": 1332,
+      "departureMinutes": 1342,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12309",
+      "stationCode": "PRYJ",
+      "sequence": 3,
+      "arrivalMinutes": 10,
+      "departureMinutes": 12,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12309",
+      "stationCode": "CNB",
+      "sequence": 4,
+      "arrivalMinutes": 135,
+      "departureMinutes": 140,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12309",
+      "stationCode": "NDLS",
+      "sequence": 5,
+      "arrivalMinutes": 460,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12393",
+      "stationCode": "PNBE",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1165,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12393",
+      "stationCode": "DDU",
+      "sequence": 2,
+      "arrivalMinutes": 1345,
+      "departureMinutes": 1355,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12393",
+      "stationCode": "CNB",
+      "sequence": 3,
+      "arrivalMinutes": 150,
+      "departureMinutes": 155,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12393",
+      "stationCode": "NDLS",
+      "sequence": 4,
+      "arrivalMinutes": 475,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12301",
+      "stationCode": "HWH",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1010,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12301",
+      "stationCode": "GAYA",
+      "sequence": 2,
+      "arrivalMinutes": 1355,
+      "departureMinutes": 1360,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12301",
+      "stationCode": "DDU",
+      "sequence": 3,
+      "arrivalMinutes": 45,
+      "departureMinutes": 55,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12301",
+      "stationCode": "PRYJ",
+      "sequence": 4,
+      "arrivalMinutes": 160,
+      "departureMinutes": 165,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12301",
+      "stationCode": "CNB",
+      "sequence": 5,
+      "arrivalMinutes": 290,
+      "departureMinutes": 295,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12301",
+      "stationCode": "NDLS",
+      "sequence": 6,
+      "arrivalMinutes": 605,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12313",
+      "stationCode": "SDAH",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1010,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12313",
+      "stationCode": "DDU",
+      "sequence": 2,
+      "arrivalMinutes": 65,
+      "departureMinutes": 75,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12313",
+      "stationCode": "CNB",
+      "sequence": 3,
+      "arrivalMinutes": 315,
+      "departureMinutes": 320,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12313",
+      "stationCode": "NDLS",
+      "sequence": 4,
+      "arrivalMinutes": 630,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12423",
+      "stationCode": "GHY",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 420,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12423",
+      "stationCode": "NJP",
+      "sequence": 2,
+      "arrivalMinutes": 795,
+      "departureMinutes": 805,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12423",
+      "stationCode": "PNBE",
+      "sequence": 3,
+      "arrivalMinutes": 1300,
+      "departureMinutes": 1310,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12423",
+      "stationCode": "DDU",
+      "sequence": 4,
+      "arrivalMinutes": 55,
+      "departureMinutes": 65,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12423",
+      "stationCode": "CNB",
+      "sequence": 5,
+      "arrivalMinutes": 300,
+      "departureMinutes": 305,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12423",
+      "stationCode": "NDLS",
+      "sequence": 6,
+      "arrivalMinutes": 630,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12505",
+      "stationCode": "GHY",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 760,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12505",
+      "stationCode": "NJP",
+      "sequence": 2,
+      "arrivalMinutes": 1190,
+      "departureMinutes": 1200,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12505",
+      "stationCode": "PNBE",
+      "sequence": 3,
+      "arrivalMinutes": 335,
+      "departureMinutes": 345,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12505",
+      "stationCode": "CNB",
+      "sequence": 4,
+      "arrivalMinutes": 900,
+      "departureMinutes": 905,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12505",
+      "stationCode": "ANVT",
+      "sequence": 5,
+      "arrivalMinutes": 1310,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "22823",
+      "stationCode": "BBS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 570,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "22823",
+      "stationCode": "GAYA",
+      "sequence": 2,
+      "arrivalMinutes": 1320,
+      "departureMinutes": 1325,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "22823",
+      "stationCode": "CNB",
+      "sequence": 3,
+      "arrivalMinutes": 280,
+      "departureMinutes": 285,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "22823",
+      "stationCode": "NDLS",
+      "sequence": 4,
+      "arrivalMinutes": 595,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12453",
+      "stationCode": "RNC",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1035,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12453",
+      "stationCode": "DDU",
+      "sequence": 2,
+      "arrivalMinutes": 75,
+      "departureMinutes": 85,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12453",
+      "stationCode": "CNB",
+      "sequence": 3,
+      "arrivalMinutes": 325,
+      "departureMinutes": 330,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12453",
+      "stationCode": "NDLS",
+      "sequence": 4,
+      "arrivalMinutes": 670,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12015",
+      "stationCode": "NDLS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 370,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12015",
+      "stationCode": "JP",
+      "sequence": 2,
+      "arrivalMinutes": 640,
+      "departureMinutes": null,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12985",
+      "stationCode": "DEE",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1055,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12985",
+      "stationCode": "JP",
+      "sequence": 2,
+      "arrivalMinutes": 1325,
+      "departureMinutes": null,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12414",
+      "stationCode": "JAT",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1095,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12414",
+      "stationCode": "DLI",
+      "sequence": 2,
+      "arrivalMinutes": 255,
+      "departureMinutes": 270,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12414",
+      "stationCode": "JP",
+      "sequence": 3,
+      "arrivalMinutes": 580,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12461",
+      "stationCode": "DLI",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1280,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12461",
+      "stationCode": "JP",
+      "sequence": 2,
+      "arrivalMinutes": 155,
+      "departureMinutes": 165,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12461",
+      "stationCode": "JU",
+      "sequence": 3,
+      "arrivalMinutes": 465,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12957",
+      "stationCode": "ADI",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1125,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12957",
+      "stationCode": "JP",
+      "sequence": 2,
+      "arrivalMinutes": 175,
+      "departureMinutes": 185,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12957",
+      "stationCode": "NDLS",
+      "sequence": 3,
+      "arrivalMinutes": 450,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12915",
+      "stationCode": "ADI",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1160,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12915",
+      "stationCode": "JP",
+      "sequence": 2,
+      "arrivalMinutes": 260,
+      "departureMinutes": 270,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12915",
+      "stationCode": "DLI",
+      "sequence": 3,
+      "arrivalMinutes": 600,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12951",
+      "stationCode": "MMCT",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1020,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12951",
+      "stationCode": "ST",
+      "sequence": 2,
+      "arrivalMinutes": 1185,
+      "departureMinutes": 1190,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12951",
+      "stationCode": "BRC",
+      "sequence": 3,
+      "arrivalMinutes": 1265,
+      "departureMinutes": 1275,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12951",
+      "stationCode": "NDLS",
+      "sequence": 4,
+      "arrivalMinutes": 512,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12953",
+      "stationCode": "MMCT",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1030,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12953",
+      "stationCode": "ST",
+      "sequence": 2,
+      "arrivalMinutes": 1205,
+      "departureMinutes": 1210,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12953",
+      "stationCode": "BRC",
+      "sequence": 3,
+      "arrivalMinutes": 1295,
+      "departureMinutes": 1305,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12953",
+      "stationCode": "NZM",
+      "sequence": 4,
+      "arrivalMinutes": 583,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12903",
+      "stationCode": "MMCT",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1125,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12903",
+      "stationCode": "ST",
+      "sequence": 2,
+      "arrivalMinutes": 1320,
+      "departureMinutes": 1325,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12903",
+      "stationCode": "BRC",
+      "sequence": 3,
+      "arrivalMinutes": 1420,
+      "departureMinutes": 1430,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12903",
+      "stationCode": "NZM",
+      "sequence": 4,
+      "arrivalMinutes": 830,
+      "departureMinutes": 845,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12903",
+      "stationCode": "ASR",
+      "sequence": 5,
+      "arrivalMinutes": 1425,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12263",
+      "stationCode": "PUNE",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 670,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12263",
+      "stationCode": "BRC",
+      "sequence": 2,
+      "arrivalMinutes": 1160,
+      "departureMinutes": 1170,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12263",
+      "stationCode": "NZM",
+      "sequence": 3,
+      "arrivalMinutes": 405,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12002",
+      "stationCode": "NDLS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 360,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12002",
+      "stationCode": "AGC",
+      "sequence": 2,
+      "arrivalMinutes": 470,
+      "departureMinutes": 475,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12002",
+      "stationCode": "GWL",
+      "sequence": 3,
+      "arrivalMinutes": 550,
+      "departureMinutes": 555,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12002",
+      "stationCode": "VGLJ",
+      "sequence": 4,
+      "arrivalMinutes": 625,
+      "departureMinutes": 630,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12002",
+      "stationCode": "BPL",
+      "sequence": 5,
+      "arrivalMinutes": 865,
+      "departureMinutes": null,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12155",
+      "stationCode": "BPL",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1350,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12155",
+      "stationCode": "VGLJ",
+      "sequence": 2,
+      "arrivalMinutes": 130,
+      "departureMinutes": 135,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12155",
+      "stationCode": "AGC",
+      "sequence": 3,
+      "arrivalMinutes": 315,
+      "departureMinutes": 320,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12155",
+      "stationCode": "NZM",
+      "sequence": 4,
+      "arrivalMinutes": 490,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12621",
+      "stationCode": "MAS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1320,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12621",
+      "stationCode": "BZA",
+      "sequence": 2,
+      "arrivalMinutes": 255,
+      "departureMinutes": 265,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12621",
+      "stationCode": "NGP",
+      "sequence": 3,
+      "arrivalMinutes": 835,
+      "departureMinutes": 845,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12621",
+      "stationCode": "BPL",
+      "sequence": 4,
+      "arrivalMinutes": 1160,
+      "departureMinutes": 1170,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12621",
+      "stationCode": "VGLJ",
+      "sequence": 5,
+      "arrivalMinutes": 1410,
+      "departureMinutes": 1418,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12621",
+      "stationCode": "NDLS",
+      "sequence": 6,
+      "arrivalMinutes": 395,
+      "departureMinutes": null,
+      "dayOffset": 2
+    },
+    {
+      "trainNumber": "12433",
+      "stationCode": "MAS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 365,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12433",
+      "stationCode": "BZA",
+      "sequence": 2,
+      "arrivalMinutes": 705,
+      "departureMinutes": 715,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12433",
+      "stationCode": "NGP",
+      "sequence": 3,
+      "arrivalMinutes": 1245,
+      "departureMinutes": 1250,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12433",
+      "stationCode": "BPL",
+      "sequence": 4,
+      "arrivalMinutes": 135,
+      "departureMinutes": 140,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12433",
+      "stationCode": "NZM",
+      "sequence": 5,
+      "arrivalMinutes": 630,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12723",
+      "stationCode": "HYB",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 385,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12723",
+      "stationCode": "SC",
+      "sequence": 2,
+      "arrivalMinutes": 410,
+      "departureMinutes": 420,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12723",
+      "stationCode": "NGP",
+      "sequence": 3,
+      "arrivalMinutes": 925,
+      "departureMinutes": 930,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12723",
+      "stationCode": "BPL",
+      "sequence": 4,
+      "arrivalMinutes": 1265,
+      "departureMinutes": 1275,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12723",
+      "stationCode": "NDLS",
+      "sequence": 5,
+      "arrivalMinutes": 480,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "22691",
+      "stationCode": "SBC",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1200,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "22691",
+      "stationCode": "SC",
+      "sequence": 2,
+      "arrivalMinutes": 430,
+      "departureMinutes": 440,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "22691",
+      "stationCode": "NGP",
+      "sequence": 3,
+      "arrivalMinutes": 960,
+      "departureMinutes": 965,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "22691",
+      "stationCode": "BPL",
+      "sequence": 4,
+      "arrivalMinutes": 1280,
+      "departureMinutes": 1285,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "22691",
+      "stationCode": "NZM",
+      "sequence": 5,
+      "arrivalMinutes": 330,
+      "departureMinutes": null,
+      "dayOffset": 2
+    },
+    {
+      "trainNumber": "12625",
+      "stationCode": "TVC",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 750,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12625",
+      "stationCode": "ERS",
+      "sequence": 2,
+      "arrivalMinutes": 990,
+      "departureMinutes": 995,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12625",
+      "stationCode": "CBE",
+      "sequence": 3,
+      "arrivalMinutes": 1210,
+      "departureMinutes": 1215,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12625",
+      "stationCode": "BZA",
+      "sequence": 4,
+      "arrivalMinutes": 530,
+      "departureMinutes": 540,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12625",
+      "stationCode": "NGP",
+      "sequence": 5,
+      "arrivalMinutes": 1160,
+      "departureMinutes": 1165,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12625",
+      "stationCode": "BPL",
+      "sequence": 6,
+      "arrivalMinutes": 60,
+      "departureMinutes": 70,
+      "dayOffset": 2
+    },
+    {
+      "trainNumber": "12625",
+      "stationCode": "NDLS",
+      "sequence": 7,
+      "arrivalMinutes": 795,
+      "departureMinutes": null,
+      "dayOffset": 2
+    },
+    {
+      "trainNumber": "12431",
+      "stationCode": "TVC",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1155,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12431",
+      "stationCode": "ERS",
+      "sequence": 2,
+      "arrivalMinutes": 1350,
+      "departureMinutes": 1355,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12431",
+      "stationCode": "MAO",
+      "sequence": 3,
+      "arrivalMinutes": 580,
+      "departureMinutes": 590,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12431",
+      "stationCode": "BRC",
+      "sequence": 4,
+      "arrivalMinutes": 50,
+      "departureMinutes": 60,
+      "dayOffset": 2
+    },
+    {
+      "trainNumber": "12431",
+      "stationCode": "NZM",
+      "sequence": 5,
+      "arrivalMinutes": 750,
+      "departureMinutes": null,
+      "dayOffset": 2
+    },
+    {
+      "trainNumber": "12123",
+      "stationCode": "CSMT",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1030,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12123",
+      "stationCode": "PUNE",
+      "sequence": 2,
+      "arrivalMinutes": 1225,
+      "departureMinutes": null,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12127",
+      "stationCode": "CSMT",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 400,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12127",
+      "stationCode": "PUNE",
+      "sequence": 2,
+      "arrivalMinutes": 595,
+      "departureMinutes": null,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12009",
+      "stationCode": "MMCT",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 380,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12009",
+      "stationCode": "ST",
+      "sequence": 2,
+      "arrivalMinutes": 555,
+      "departureMinutes": 560,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12009",
+      "stationCode": "BRC",
+      "sequence": 3,
+      "arrivalMinutes": 645,
+      "departureMinutes": 650,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12009",
+      "stationCode": "ADI",
+      "sequence": 4,
+      "arrivalMinutes": 765,
+      "departureMinutes": null,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12901",
+      "stationCode": "MMCT",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1300,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12901",
+      "stationCode": "ST",
+      "sequence": 2,
+      "arrivalMinutes": 65,
+      "departureMinutes": 70,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12901",
+      "stationCode": "BRC",
+      "sequence": 3,
+      "arrivalMinutes": 175,
+      "departureMinutes": 185,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12901",
+      "stationCode": "ADI",
+      "sequence": 4,
+      "arrivalMinutes": 325,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12101",
+      "stationCode": "LTT",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1235,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12101",
+      "stationCode": "NGP",
+      "sequence": 2,
+      "arrivalMinutes": 550,
+      "departureMinutes": 560,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12101",
+      "stationCode": "HWH",
+      "sequence": 3,
+      "arrivalMinutes": 225,
+      "departureMinutes": null,
+      "dayOffset": 2
+    },
+    {
+      "trainNumber": "12261",
+      "stationCode": "CSMT",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1035,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12261",
+      "stationCode": "NGP",
+      "sequence": 2,
+      "arrivalMinutes": 255,
+      "departureMinutes": 260,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12261",
+      "stationCode": "HWH",
+      "sequence": 3,
+      "arrivalMinutes": 1215,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "11301",
+      "stationCode": "CSMT",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 490,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "11301",
+      "stationCode": "PUNE",
+      "sequence": 2,
+      "arrivalMinutes": 705,
+      "departureMinutes": 715,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "11301",
+      "stationCode": "SBC",
+      "sequence": 3,
+      "arrivalMinutes": 345,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12163",
+      "stationCode": "LTT",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1125,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12163",
+      "stationCode": "PUNE",
+      "sequence": 2,
+      "arrivalMinutes": 1340,
+      "departureMinutes": 1345,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12163",
+      "stationCode": "MAS",
+      "sequence": 3,
+      "arrivalMinutes": 990,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "10103",
+      "stationCode": "CSMT",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 430,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "10103",
+      "stationCode": "MAO",
+      "sequence": 2,
+      "arrivalMinutes": 1125,
+      "departureMinutes": null,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12701",
+      "stationCode": "CSMT",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1310,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12701",
+      "stationCode": "PUNE",
+      "sequence": 2,
+      "arrivalMinutes": 85,
+      "departureMinutes": 90,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12701",
+      "stationCode": "HYB",
+      "sequence": 3,
+      "arrivalMinutes": 705,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12839",
+      "stationCode": "HWH",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1435,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12839",
+      "stationCode": "BBS",
+      "sequence": 2,
+      "arrivalMinutes": 390,
+      "departureMinutes": 400,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12839",
+      "stationCode": "VSKP",
+      "sequence": 3,
+      "arrivalMinutes": 825,
+      "departureMinutes": 845,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12839",
+      "stationCode": "BZA",
+      "sequence": 4,
+      "arrivalMinutes": 1190,
+      "departureMinutes": 1200,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12839",
+      "stationCode": "MAS",
+      "sequence": 5,
+      "arrivalMinutes": 200,
+      "departureMinutes": null,
+      "dayOffset": 2
+    },
+    {
+      "trainNumber": "12841",
+      "stationCode": "HWH",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 920,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12841",
+      "stationCode": "BBS",
+      "sequence": 2,
+      "arrivalMinutes": 1290,
+      "departureMinutes": 1300,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12841",
+      "stationCode": "VSKP",
+      "sequence": 3,
+      "arrivalMinutes": 255,
+      "departureMinutes": 275,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12841",
+      "stationCode": "BZA",
+      "sequence": 4,
+      "arrivalMinutes": 600,
+      "departureMinutes": 610,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12841",
+      "stationCode": "MAS",
+      "sequence": 5,
+      "arrivalMinutes": 1020,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12245",
+      "stationCode": "HWH",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 650,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12245",
+      "stationCode": "BBS",
+      "sequence": 2,
+      "arrivalMinutes": 1000,
+      "departureMinutes": 1005,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12245",
+      "stationCode": "VSKP",
+      "sequence": 3,
+      "arrivalMinutes": 1375,
+      "departureMinutes": 1390,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12245",
+      "stationCode": "BZA",
+      "sequence": 4,
+      "arrivalMinutes": 260,
+      "departureMinutes": 270,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12245",
+      "stationCode": "SMVB",
+      "sequence": 5,
+      "arrivalMinutes": 960,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12860",
+      "stationCode": "HWH",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 845,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12860",
+      "stationCode": "NGP",
+      "sequence": 2,
+      "arrivalMinutes": 430,
+      "departureMinutes": 440,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12860",
+      "stationCode": "CSMT",
+      "sequence": 3,
+      "arrivalMinutes": 1280,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12510",
+      "stationCode": "GHY",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 380,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12510",
+      "stationCode": "NJP",
+      "sequence": 2,
+      "arrivalMinutes": 830,
+      "departureMinutes": 840,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12510",
+      "stationCode": "HWH",
+      "sequence": 3,
+      "arrivalMinutes": 35,
+      "departureMinutes": 50,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12510",
+      "stationCode": "BBS",
+      "sequence": 4,
+      "arrivalMinutes": 450,
+      "departureMinutes": 460,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12510",
+      "stationCode": "VSKP",
+      "sequence": 5,
+      "arrivalMinutes": 850,
+      "departureMinutes": 870,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12510",
+      "stationCode": "SMVB",
+      "sequence": 6,
+      "arrivalMinutes": 615,
+      "departureMinutes": null,
+      "dayOffset": 2
+    },
+    {
+      "trainNumber": "12007",
+      "stationCode": "MAS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 360,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12007",
+      "stationCode": "SBC",
+      "sequence": 2,
+      "arrivalMinutes": 655,
+      "departureMinutes": null,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12607",
+      "stationCode": "MAS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 930,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12607",
+      "stationCode": "SBC",
+      "sequence": 2,
+      "arrivalMinutes": 1295,
+      "departureMinutes": null,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12677",
+      "stationCode": "SBC",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 370,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12677",
+      "stationCode": "CBE",
+      "sequence": 2,
+      "arrivalMinutes": 790,
+      "departureMinutes": 795,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12677",
+      "stationCode": "ERS",
+      "sequence": 3,
+      "arrivalMinutes": 1015,
+      "departureMinutes": null,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12759",
+      "stationCode": "MS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1090,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12759",
+      "stationCode": "BZA",
+      "sequence": 2,
+      "arrivalMinutes": 45,
+      "departureMinutes": 55,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12759",
+      "stationCode": "SC",
+      "sequence": 3,
+      "arrivalMinutes": 385,
+      "departureMinutes": 390,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12759",
+      "stationCode": "HYB",
+      "sequence": 4,
+      "arrivalMinutes": 425,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12785",
+      "stationCode": "KCG",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1145,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12785",
+      "stationCode": "SBC",
+      "sequence": 2,
+      "arrivalMinutes": 385,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12213",
+      "stationCode": "YPR",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1420,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12213",
+      "stationCode": "SC",
+      "sequence": 2,
+      "arrivalMinutes": 615,
+      "departureMinutes": 625,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12213",
+      "stationCode": "BPL",
+      "sequence": 3,
+      "arrivalMinutes": 10,
+      "departureMinutes": 20,
+      "dayOffset": 2
+    },
+    {
+      "trainNumber": "12213",
+      "stationCode": "DEE",
+      "sequence": 4,
+      "arrivalMinutes": 475,
+      "departureMinutes": null,
+      "dayOffset": 2
+    },
+    {
+      "trainNumber": "12952",
+      "stationCode": "NDLS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1015,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12952",
+      "stationCode": "BRC",
+      "sequence": 2,
+      "arrivalMinutes": 230,
+      "departureMinutes": 240,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12952",
+      "stationCode": "ST",
+      "sequence": 3,
+      "arrivalMinutes": 330,
+      "departureMinutes": 335,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12952",
+      "stationCode": "MMCT",
+      "sequence": 4,
+      "arrivalMinutes": 515,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12958",
+      "stationCode": "NDLS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1195,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12958",
+      "stationCode": "JP",
+      "sequence": 2,
+      "arrivalMinutes": 25,
+      "departureMinutes": 35,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12958",
+      "stationCode": "ADI",
+      "sequence": 3,
+      "arrivalMinutes": 580,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12310",
+      "stationCode": "NDLS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1030,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12310",
+      "stationCode": "CNB",
+      "sequence": 2,
+      "arrivalMinutes": 1310,
+      "departureMinutes": 1315,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12310",
+      "stationCode": "PRYJ",
+      "sequence": 3,
+      "arrivalMinutes": 5,
+      "departureMinutes": 7,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12310",
+      "stationCode": "DDU",
+      "sequence": 4,
+      "arrivalMinutes": 120,
+      "departureMinutes": 130,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12310",
+      "stationCode": "PNBE",
+      "sequence": 5,
+      "arrivalMinutes": 300,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12302",
+      "stationCode": "NDLS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1010,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12302",
+      "stationCode": "CNB",
+      "sequence": 2,
+      "arrivalMinutes": 1290,
+      "departureMinutes": 1295,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12302",
+      "stationCode": "PRYJ",
+      "sequence": 3,
+      "arrivalMinutes": 1415,
+      "departureMinutes": 1420,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12302",
+      "stationCode": "DDU",
+      "sequence": 4,
+      "arrivalMinutes": 95,
+      "departureMinutes": 105,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12302",
+      "stationCode": "GAYA",
+      "sequence": 5,
+      "arrivalMinutes": 225,
+      "departureMinutes": 230,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12302",
+      "stationCode": "HWH",
+      "sequence": 6,
+      "arrivalMinutes": 595,
+      "departureMinutes": null,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12622",
+      "stationCode": "NDLS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1265,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12622",
+      "stationCode": "VGLJ",
+      "sequence": 2,
+      "arrivalMinutes": 195,
+      "departureMinutes": 203,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12622",
+      "stationCode": "BPL",
+      "sequence": 3,
+      "arrivalMinutes": 440,
+      "departureMinutes": 450,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12622",
+      "stationCode": "NGP",
+      "sequence": 4,
+      "arrivalMinutes": 785,
+      "departureMinutes": 795,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12622",
+      "stationCode": "BZA",
+      "sequence": 5,
+      "arrivalMinutes": 1370,
+      "departureMinutes": 1380,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12622",
+      "stationCode": "MAS",
+      "sequence": 6,
+      "arrivalMinutes": 375,
+      "departureMinutes": null,
+      "dayOffset": 2
+    },
+    {
+      "trainNumber": "22692",
+      "stationCode": "NZM",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 1190,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "22692",
+      "stationCode": "BPL",
+      "sequence": 2,
+      "arrivalMinutes": 225,
+      "departureMinutes": 230,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "22692",
+      "stationCode": "NGP",
+      "sequence": 3,
+      "arrivalMinutes": 555,
+      "departureMinutes": 560,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "22692",
+      "stationCode": "SC",
+      "sequence": 4,
+      "arrivalMinutes": 1090,
+      "departureMinutes": 1100,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "22692",
+      "stationCode": "SBC",
+      "sequence": 5,
+      "arrivalMinutes": 320,
+      "departureMinutes": null,
+      "dayOffset": 2
+    },
+    {
+      "trainNumber": "12424",
+      "stationCode": "NDLS",
+      "sequence": 1,
+      "arrivalMinutes": null,
+      "departureMinutes": 980,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12424",
+      "stationCode": "CNB",
+      "sequence": 2,
+      "arrivalMinutes": 1260,
+      "departureMinutes": 1265,
+      "dayOffset": 0
+    },
+    {
+      "trainNumber": "12424",
+      "stationCode": "DDU",
+      "sequence": 3,
+      "arrivalMinutes": 50,
+      "departureMinutes": 60,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12424",
+      "stationCode": "PNBE",
+      "sequence": 4,
+      "arrivalMinutes": 240,
+      "departureMinutes": 250,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12424",
+      "stationCode": "NJP",
+      "sequence": 5,
+      "arrivalMinutes": 750,
+      "departureMinutes": 760,
+      "dayOffset": 1
+    },
+    {
+      "trainNumber": "12424",
+      "stationCode": "GHY",
+      "sequence": 6,
+      "arrivalMinutes": 1170,
+      "departureMinutes": null,
+      "dayOffset": 1
+    }
+  ],
+  "stationTransfers": [
+    {
+      "fromStationCode": "NDLS",
+      "toStationCode": "NZM",
+      "typicalMinutes": 45,
+      "modeNote": "Delhi Metro (Violet/Pink) or cab",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "NZM",
+      "toStationCode": "NDLS",
+      "typicalMinutes": 45,
+      "modeNote": "Delhi Metro (Violet/Pink) or cab",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "NDLS",
+      "toStationCode": "ANVT",
+      "typicalMinutes": 55,
+      "modeNote": "Delhi Metro (Blue Line) or cab",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "ANVT",
+      "toStationCode": "NDLS",
+      "typicalMinutes": 55,
+      "modeNote": "Delhi Metro (Blue Line) or cab",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "NDLS",
+      "toStationCode": "DLI",
+      "typicalMinutes": 25,
+      "modeNote": "Delhi Metro (Yellow Line) or auto",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "DLI",
+      "toStationCode": "NDLS",
+      "typicalMinutes": 25,
+      "modeNote": "Delhi Metro (Yellow Line) or auto",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "NDLS",
+      "toStationCode": "DEE",
+      "typicalMinutes": 35,
+      "modeNote": "Cab / auto via Pusa Road",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "DEE",
+      "toStationCode": "NDLS",
+      "typicalMinutes": 35,
+      "modeNote": "Cab / auto via Pusa Road",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "NZM",
+      "toStationCode": "ANVT",
+      "typicalMinutes": 45,
+      "modeNote": "Delhi Metro (Pink Line direct)",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "ANVT",
+      "toStationCode": "NZM",
+      "typicalMinutes": 45,
+      "modeNote": "Delhi Metro (Pink Line direct)",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "NZM",
+      "toStationCode": "DLI",
+      "typicalMinutes": 50,
+      "modeNote": "Cab / Metro via Kashmere Gate",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "DLI",
+      "toStationCode": "NZM",
+      "typicalMinutes": 50,
+      "modeNote": "Cab / Metro via Kashmere Gate",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "DLI",
+      "toStationCode": "ANVT",
+      "typicalMinutes": 50,
+      "modeNote": "Delhi Metro (Red + Pink/Blue)",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "ANVT",
+      "toStationCode": "DLI",
+      "typicalMinutes": 50,
+      "modeNote": "Delhi Metro (Red + Pink/Blue)",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "DLI",
+      "toStationCode": "DEE",
+      "typicalMinutes": 25,
+      "modeNote": "Auto / cab via Sadar Bazar",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "DEE",
+      "toStationCode": "DLI",
+      "typicalMinutes": 25,
+      "modeNote": "Auto / cab via Sadar Bazar",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "CSMT",
+      "toStationCode": "LTT",
+      "typicalMinutes": 55,
+      "modeNote": "Harbour/Central suburban + auto",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "LTT",
+      "toStationCode": "CSMT",
+      "typicalMinutes": 55,
+      "modeNote": "Harbour/Central suburban + auto",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "CSMT",
+      "toStationCode": "MMCT",
+      "typicalMinutes": 35,
+      "modeNote": "Cab / bus via Marine Drive",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "MMCT",
+      "toStationCode": "CSMT",
+      "typicalMinutes": 35,
+      "modeNote": "Cab / bus via Marine Drive",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "CSMT",
+      "toStationCode": "BDTS",
+      "typicalMinutes": 60,
+      "modeNote": "Harbour/Western suburban or cab",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "BDTS",
+      "toStationCode": "CSMT",
+      "typicalMinutes": 60,
+      "modeNote": "Harbour/Western suburban or cab",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "LTT",
+      "toStationCode": "MMCT",
+      "typicalMinutes": 55,
+      "modeNote": "Cab / suburban via Dadar",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "MMCT",
+      "toStationCode": "LTT",
+      "typicalMinutes": 55,
+      "modeNote": "Cab / suburban via Dadar",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "LTT",
+      "toStationCode": "BDTS",
+      "typicalMinutes": 40,
+      "modeNote": "Cab / auto via BKC",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "BDTS",
+      "toStationCode": "LTT",
+      "typicalMinutes": 40,
+      "modeNote": "Cab / auto via BKC",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "MMCT",
+      "toStationCode": "BDTS",
+      "typicalMinutes": 35,
+      "modeNote": "Western suburban to Bandra + auto",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "BDTS",
+      "toStationCode": "MMCT",
+      "typicalMinutes": 35,
+      "modeNote": "Western suburban to Bandra + auto",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "HWH",
+      "toStationCode": "SDAH",
+      "typicalMinutes": 40,
+      "modeNote": "Kolkata Metro (Green Line) or cab",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "SDAH",
+      "toStationCode": "HWH",
+      "typicalMinutes": 40,
+      "modeNote": "Kolkata Metro (Green Line) or cab",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "HWH",
+      "toStationCode": "KOAA",
+      "typicalMinutes": 55,
+      "modeNote": "Cab via Howrah Bridge",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "KOAA",
+      "toStationCode": "HWH",
+      "typicalMinutes": 55,
+      "modeNote": "Cab via Howrah Bridge",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "SDAH",
+      "toStationCode": "KOAA",
+      "typicalMinutes": 35,
+      "modeNote": "Cab / auto via Ultadanga",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "KOAA",
+      "toStationCode": "SDAH",
+      "typicalMinutes": 35,
+      "modeNote": "Cab / auto via Ultadanga",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "MAS",
+      "toStationCode": "MS",
+      "typicalMinutes": 25,
+      "modeNote": "Chennai Metro (Green Line) or auto",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "MS",
+      "toStationCode": "MAS",
+      "typicalMinutes": 25,
+      "modeNote": "Chennai Metro (Green Line) or auto",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "SBC",
+      "toStationCode": "YPR",
+      "typicalMinutes": 30,
+      "modeNote": "Namma Metro (Green Line)",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "YPR",
+      "toStationCode": "SBC",
+      "typicalMinutes": 30,
+      "modeNote": "Namma Metro (Green Line)",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "SBC",
+      "toStationCode": "SMVB",
+      "typicalMinutes": 50,
+      "modeNote": "Namma Metro (Purple Line to Baiyappanahalli) + auto",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "SMVB",
+      "toStationCode": "SBC",
+      "typicalMinutes": 50,
+      "modeNote": "Namma Metro (Purple Line to Baiyappanahalli) + auto",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "YPR",
+      "toStationCode": "SMVB",
+      "typicalMinutes": 50,
+      "modeNote": "Cab via Outer Ring Road",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "SMVB",
+      "toStationCode": "YPR",
+      "typicalMinutes": 50,
+      "modeNote": "Cab via Outer Ring Road",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "SC",
+      "toStationCode": "HYB",
+      "typicalMinutes": 35,
+      "modeNote": "Hyderabad Metro (Red/Blue) or cab",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "HYB",
+      "toStationCode": "SC",
+      "typicalMinutes": 35,
+      "modeNote": "Hyderabad Metro (Red/Blue) or cab",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "SC",
+      "toStationCode": "KCG",
+      "typicalMinutes": 30,
+      "modeNote": "MMTS suburban or cab",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "KCG",
+      "toStationCode": "SC",
+      "typicalMinutes": 30,
+      "modeNote": "MMTS suburban or cab",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "HYB",
+      "toStationCode": "KCG",
+      "typicalMinutes": 25,
+      "modeNote": "Cab / auto",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    },
+    {
+      "fromStationCode": "KCG",
+      "toStationCode": "HYB",
+      "typicalMinutes": 25,
+      "modeNote": "Cab / auto",
+      "source": "in-ref-city-transit",
+      "lastVerified": "2026-11-25"
+    }
+  ]
+}

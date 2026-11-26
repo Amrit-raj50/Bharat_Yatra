@@ -7,6 +7,8 @@ web-build/
 *.db-shm
 .DS_Store
 Thumbs.db
+.env
+backend/.env
 npm-debug.*
 yarn-error.*
 
