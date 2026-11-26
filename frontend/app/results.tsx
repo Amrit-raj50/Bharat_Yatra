@@ -1,33 +1,64 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ActivityIndicator,
   FlatList,
+  Modal,
+  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { RatingBadge } from '@/components/RatingBadge';
-import { SampleBanner } from '@/components/SampleBanner';
-import {
-  formatDurationLocalized,
-  formatIsoDateShort,
-  formatRunningDays,
-} from '@/components/formatters';
-import { BUFFER_PROFILE_EXTRA_MINUTES } from '@/config/ratingThresholds';
-import { addDaysIsoDate, formatClockMinutes } from '@/domain/time';
-import type { ConnectionOption, DirectTrainOption } from '@/domain/types';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AppHeader } from '@/components/AppHeader';
+import { EmptyState } from '@/components/EmptyState';
+import { InfoStrip } from '@/components/InfoStrip';
+import { SkeletonCard } from '@/components/SkeletonCard';
+import { TrainCard } from '@/components/TrainCard';
+import { formatDurationLocalized, formatIsoDateShort, formatRunningDays } from '@/components/formatters';
+import { addDaysIsoDate, formatClockMinutes, getTodayIsoDateLocal } from '@/domain/time';
+import type { BufferRating, ConnectionOption, DirectTrainOption } from '@/domain/types';
 import { useAppStore } from '@/state/useAppStore';
+import { COLORS, ELEVATION, RADII, SPACING, TOUCH_MIN } from '@/theme/theme';
 
-type SortMode = 'total' | 'layover' | 'departure';
-type FilterMode = 'all' | 'direct' | 'safe' | 'sameStation' | 'stationChange' | 'tight';
+type SortMode = 'recommended' | 'total' | 'layover' | 'departure' | 'arrival';
+type FilterMode = 'all' | 'direct' | 'safe' | 'sameStation' | 'hideTight' | 'hideNight';
+
+interface GroupedConnection {
+  primary: ConnectionOption;
+  similar: ConnectionOption[];
+}
+
+const RATING_PRIORITY: Record<BufferRating, number> = {
+  COMFORTABLE: 0,
+  OK: 1,
+  TRANSFER_UNKNOWN: 2,
+  TOO_LONG: 3,
+  TIGHT: 4,
+};
+
+function parseIsoToLocalDate(isoDate: string): Date {
+  const [y, m, d] = isoDate.split('-').map(Number);
+  if (!y || !m || !d) return new Date();
+  return new Date(y, m - 1, d);
+}
+
+function formatLocalDateToIso(date: Date): string {
+  const y = String(date.getFullYear()).padStart(4, '0');
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
 
 export default function ResultsScreen(): React.ReactElement {
   const { t } = useTranslation();
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const {
     sourceStation,
     destinationStation,
@@ -35,29 +66,28 @@ export default function ResultsScreen(): React.ReactElement {
     results,
     directTrains,
     isSearching,
-    bufferProfile,
     savedConnections,
     toggleSaveConnection,
     setTravelDateAndSearch,
   } = useAppStore();
 
-  const extraBufferMinutes = BUFFER_PROFILE_EXTRA_MINUTES[bufferProfile];
   const savedIds = useMemo(() => new Set(savedConnections.map((c) => c.id)), [savedConnections]);
-
-  const [sortMode, setSortMode] = useState<SortMode>('total');
+  const [sortMode, setSortMode] = useState<SortMode>('recommended');
   const [filterMode, setFilterMode] = useState<FilterMode>('all');
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showDirectSheet, setShowDirectSheet] = useState(false);
 
-  const displayedResults = useMemo(() => {
+  const groupedResults = useMemo((): GroupedConnection[] => {
     const filtered = results.filter((item) => {
       switch (filterMode) {
         case 'safe':
           return item.rating === 'COMFORTABLE' || item.rating === 'OK';
         case 'sameStation':
           return !item.isStationChange;
-        case 'stationChange':
-          return item.isStationChange;
-        case 'tight':
-          return item.rating === 'TIGHT';
+        case 'hideTight':
+          return item.rating !== 'TIGHT';
+        case 'hideNight':
+          return !item.isLateNightTransfer;
         case 'all':
         default:
           return true;
@@ -66,103 +96,120 @@ export default function ResultsScreen(): React.ReactElement {
 
     const sorted = [...filtered];
     sorted.sort((a, b) => {
-      if (sortMode === 'layover') {
-        if (a.layoverMinutes !== b.layoverMinutes) {
-          return a.layoverMinutes - b.layoverMinutes;
-        }
+      if (sortMode === 'recommended') {
+        const rankDiff = RATING_PRIORITY[a.rating] - RATING_PRIORITY[b.rating];
+        if (rankDiff !== 0) return rankDiff;
         return a.totalJourneyMinutes - b.totalJourneyMinutes;
+      }
+      if (sortMode === 'layover') {
+        return a.layoverMinutes - b.layoverMinutes || a.totalJourneyMinutes - b.totalJourneyMinutes;
       }
       if (sortMode === 'departure') {
-        if (a.leg1.departureMinutesFromMidnight !== b.leg1.departureMinutesFromMidnight) {
-          return a.leg1.departureMinutesFromMidnight - b.leg1.departureMinutesFromMidnight;
-        }
-        return a.totalJourneyMinutes - b.totalJourneyMinutes;
+        return (
+          a.leg1.departureMinutesFromMidnight - b.leg1.departureMinutesFromMidnight ||
+          a.totalJourneyMinutes - b.totalJourneyMinutes
+        );
       }
-      if (a.totalJourneyMinutes !== b.totalJourneyMinutes) {
-        return a.totalJourneyMinutes - b.totalJourneyMinutes;
+      if (sortMode === 'arrival') {
+        return (
+          a.leg2.arrivalMinutesFromMidnight - b.leg2.arrivalMinutesFromMidnight ||
+          a.totalJourneyMinutes - b.totalJourneyMinutes
+        );
       }
-      return a.layoverMinutes - b.layoverMinutes;
+      return a.totalJourneyMinutes - b.totalJourneyMinutes || a.layoverMinutes - b.layoverMinutes;
     });
-    return sorted;
+
+    // Group near-duplicates (same train pair & hub codes)
+    const groups = new Map<string, GroupedConnection>();
+    for (const opt of sorted) {
+      const key = `${opt.leg1.trainNumber}_${opt.leg2.trainNumber}_${opt.leg1.alightStation.code}_${opt.leg2.boardStation.code}`;
+      const existing = groups.get(key);
+      if (!existing) {
+        groups.set(key, { primary: opt, similar: [] });
+      } else {
+        existing.similar.push(opt);
+      }
+    }
+    return [...groups.values()];
   }, [results, filterMode, sortMode]);
 
   const displayedDirectTrains = useMemo(() => {
     const sorted = [...directTrains];
-    sorted.sort((a, b) => {
-      if (sortMode === 'departure') {
-        return a.departureMinutesFromMidnight - b.departureMinutesFromMidnight;
-      }
-      return a.durationMinutes - b.durationMinutes;
-    });
+    sorted.sort((a, b) =>
+      sortMode === 'departure'
+        ? a.departureMinutesFromMidnight - b.departureMinutesFromMidnight
+        : a.durationMinutes - b.durationMinutes
+    );
     return sorted;
   }, [directTrains, sortMode]);
 
-  const headerComponent = (
-    <View style={styles.headerBlock}>
-      <SampleBanner />
-      <View style={styles.routeBar}>
-        <Text style={styles.routeSummary}>
-          {t('results.routeSummary', {
-            from: sourceStation?.code ?? '---',
-            to: destinationStation?.code ?? '---',
-            date: formatIsoDateShort(travelDate),
-          })}
+  const prevDate = addDaysIsoDate(travelDate, -1);
+  const nextDate = addDaysIsoDate(travelDate, 1);
+  const activeFilterCount = filterMode === 'all' ? 0 : 1;
+
+  const calendarAction = (
+    <Pressable
+      onPress={() => setShowDatePicker(true)}
+      style={styles.headerCalBtn}
+      accessibilityRole="button"
+      accessibilityLabel={t('home.pickDate')}
+    >
+      <MaterialCommunityIcons name="calendar" size={22} color={COLORS.white} />
+    </Pressable>
+  );
+
+  const renderHeaderControls = () => (
+    <View style={styles.controlsHeader}>
+      <View style={styles.summaryRow}>
+        <Text style={styles.countText}>
+          {filterMode === 'direct'
+            ? t('results.directCount', { count: displayedDirectTrains.length })
+            : t('results.count', { count: groupedResults.length })}
         </Text>
-        <View style={styles.dateStepperRow}>
+        {activeFilterCount > 0 ? (
           <Pressable
-            style={styles.dateStepBtn}
-            onPress={() => setTravelDateAndSearch(addDaysIsoDate(travelDate, -1))}
+            onPress={() => setFilterMode('all')}
+            style={styles.clearBtn}
             accessibilityRole="button"
           >
-            <Text style={styles.dateStepText}>{t('home.prevDay')}</Text>
+            <Text style={styles.clearBtnText}>
+              {t('results.clearFilters', { count: activeFilterCount })}
+            </Text>
           </Pressable>
-          <Pressable
-            style={styles.dateStepBtn}
-            onPress={() => setTravelDateAndSearch(addDaysIsoDate(travelDate, 1))}
-            accessibilityRole="button"
-          >
-            <Text style={styles.dateStepText}>{t('home.nextDay')}</Text>
-          </Pressable>
-        </View>
+        ) : null}
       </View>
 
-      <Text style={styles.countText}>
-        {filterMode === 'direct'
-          ? t('results.directCount', { count: displayedDirectTrains.length })
-          : t('results.count', { count: displayedResults.length })}
-      </Text>
-      <Text style={styles.subNote}>{t('results.sortedByTotal')}</Text>
-      <Text style={styles.disclaimer}>{t('common.scheduleDisclaimer')}</Text>
-      {extraBufferMinutes > 0 ? (
-        <View style={styles.profileBadge}>
-          <Text style={styles.profileBadgeText}>
-            {t('results.bufferProfileBadge', { minutes: extraBufferMinutes })}
-          </Text>
-        </View>
-      ) : null}
       {directTrains.length > 0 ? (
-        <View style={styles.directNoticeBox}>
-          <Text style={styles.directNoticeText}>
-            {t('results.directTrainsNotice', {
-              count: directTrains.length,
-              date: formatIsoDateShort(travelDate),
-              trains: directTrains
-                .slice(0, 3)
-                .map((d) => `${d.trainNumber} (${formatClockMinutes(d.departureMinutesFromMidnight)})`)
-                .join(', '),
-            })}
+        <Pressable
+          style={styles.directBanner}
+          onPress={() => setShowDirectSheet(true)}
+          accessibilityRole="button"
+        >
+          <MaterialCommunityIcons name="train-variant" size={18} color="#1B7F3B" />
+          <Text style={styles.directBannerText}>
+            {t('results.directTrainsBanner', { count: directTrains.length })}
           </Text>
-        </View>
+          <MaterialCommunityIcons name="chevron-right" size={18} color="#1B7F3B" />
+        </Pressable>
       ) : null}
 
-      <View style={styles.controlsBlock}>
-        <Text style={styles.controlLabel}>{t('results.sortBy')}</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chipRow}>
+      <View style={styles.chipSection}>
+        <View style={styles.chipLabelRow}>
+          <Text style={styles.controlLabel}>{t('results.sortBy')}</Text>
+          <Text style={styles.scrollHint}>{t('results.scrollHint')}</Text>
+        </View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.chipRow}
+        >
           {(
             [
+              { key: 'recommended', label: t('results.sortRecommended') },
               { key: 'total', label: t('results.sortTotal') },
               { key: 'layover', label: t('results.sortLayover') },
               { key: 'departure', label: t('results.sortDeparture') },
+              { key: 'arrival', label: t('results.sortArrival') },
             ] as const
           ).map((opt) => (
             <Pressable
@@ -179,15 +226,19 @@ export default function ResultsScreen(): React.ReactElement {
         </ScrollView>
 
         <Text style={styles.controlLabel}>{t('results.filterBy')}</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chipRow}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.chipRow}
+        >
           {(
             [
               { key: 'all', label: t('results.filterAll') },
               { key: 'direct', label: t('results.filterDirect') },
               { key: 'safe', label: t('results.filterSafe') },
               { key: 'sameStation', label: t('results.filterSameStation') },
-              { key: 'stationChange', label: t('results.filterStationChange') },
-              { key: 'tight', label: t('results.filterTight') },
+              { key: 'hideTight', label: t('results.filterHideTight') },
+              { key: 'hideNight', label: t('results.filterHideNight') },
             ] as const
           ).map((opt) => (
             <Pressable
@@ -206,491 +257,426 @@ export default function ResultsScreen(): React.ReactElement {
     </View>
   );
 
-  const renderCard = ({ item }: { item: ConnectionOption }) => {
-    const leg1Dep = formatClockMinutes(item.leg1.departureMinutesFromMidnight);
-    const leg1Arr = formatClockMinutes(item.leg1.arrivalMinutesFromMidnight);
-    const leg2Dep = formatClockMinutes(item.leg2.departureMinutesFromMidnight);
-    const leg2Arr = formatClockMinutes(item.leg2.arrivalMinutesFromMidnight);
-
-    return (
-      <Pressable
-        style={styles.card}
-        onPress={() =>
-          router.push({
-            pathname: '/connection/[id]',
-            params: { id: item.id },
-          })
-        }
-        accessibilityRole="button"
-      >
-        <View style={styles.cardTop}>
-          <RatingBadge rating={item.rating} />
-          <View style={styles.timeSummary}>
-            <Text style={styles.totalTime}>
-              {t('results.totalTime', {
-                duration: formatDurationLocalized(item.totalJourneyMinutes, t),
-              })}
-            </Text>
-            <Text style={styles.layoverText}>
-              {t('results.layover', {
-                duration: formatDurationLocalized(item.layoverMinutes, t),
-              })}
-            </Text>
-          </View>
+  const renderDirectCard = ({ item }: { item: DirectTrainOption }) => (
+    <View style={styles.directCard}>
+      <View style={styles.directTop}>
+        <View style={styles.directPill}>
+          <MaterialCommunityIcons name="train" size={14} color="#1B7F3B" />
+          <Text style={styles.directPillText}>{t('results.directBadge')}</Text>
         </View>
-
-        <View style={styles.legBlock}>
-          <Text style={styles.trainLine} numberOfLines={1}>
-            {item.leg1.trainNumber} • {item.leg1.trainName}
-          </Text>
-          <Text style={styles.timingLine}>
-            {item.leg1.boardStation.code} {leg1Dep} → {item.leg1.alightStation.code} {leg1Arr}
-            {item.leg1.arrivalIsoDate !== item.leg1.departureIsoDate ? ' (+1d)' : ''}
-          </Text>
-          <Text style={styles.runsLine}>
-            {t('common.runsOn', { days: formatRunningDays(item.leg1.runningDays, t) })}
-          </Text>
-        </View>
-
-        {item.isStationChange ? (
-          <View
-            style={[
-              styles.transferBox,
-              item.unknownTransferTime ? styles.transferUnknownBox : styles.transferChangeBox,
-            ]}
-          >
-            <Text style={styles.transferWarningTitle}>
-              {item.hubClusterName
-                ? t('results.stationChangeCluster', {
-                    cluster: item.hubClusterName,
-                    from: item.leg1.alightStation.code,
-                    to: item.leg2.boardStation.code,
-                  })
-                : t('results.stationChangeWarning', {
-                    from: item.leg1.alightStation.code,
-                    to: item.leg2.boardStation.code,
-                  })}
-            </Text>
-            <Text style={styles.transferDetailText}>
-              {item.unknownTransferTime
-                ? t('results.transferUnknown')
-                : t('results.transferEstimate', {
-                    minutes: item.transferMinutes ?? 0,
-                    note: item.transferInfo?.modeNote ?? '',
-                  })}
-            </Text>
-          </View>
-        ) : (
-          <View style={styles.sameStationBox}>
-            <Text style={styles.sameStationText}>
-              {t('results.sameStation', { code: item.leg1.alightStation.code })}
-            </Text>
-          </View>
-        )}
-
-        <View style={styles.legBlock}>
-          <Text style={styles.trainLine} numberOfLines={1}>
-            {item.leg2.trainNumber} • {item.leg2.trainName}
-          </Text>
-          <Text style={styles.timingLine}>
-            {item.leg2.boardStation.code} {leg2Dep} → {item.leg2.alightStation.code} {leg2Arr}
-            {item.leg2.arrivalIsoDate !== item.leg2.departureIsoDate ? ' (+1d)' : ''}
-          </Text>
-          <Text style={styles.runsLine}>
-            {t('common.runsOn', { days: formatRunningDays(item.leg2.runningDays, t) })}
-          </Text>
-        </View>
-
-        {item.isLateNightTransfer ? (
-          <View style={styles.lateNightBox}>
-            <Text style={styles.lateNightText}>🌙 {t('results.lateNightWarning')}</Text>
-          </View>
-        ) : null}
-
-        <View style={styles.cardFooterRow}>
-          {item.effectiveBufferMinutes !== null ? (
-            <Text style={styles.bufferFoot}>
-              {t('results.effectiveBuffer', {
-                duration: formatDurationLocalized(item.effectiveBufferMinutes, t),
-              })}
-            </Text>
-          ) : (
-            <View />
-          )}
-          <Pressable
-            style={[styles.saveBtn, savedIds.has(item.id) && styles.saveBtnActive]}
-            onPress={() => toggleSaveConnection(item)}
-            accessibilityRole="button"
-          >
-            <Text style={[styles.saveBtnText, savedIds.has(item.id) && styles.saveBtnTextActive]}>
-              {savedIds.has(item.id) ? `★ ${t('results.savedButton')}` : `☆ ${t('results.saveButton')}`}
-            </Text>
-          </Pressable>
-        </View>
-      </Pressable>
-    );
-  };
-
-  const renderDirectCard = ({ item }: { item: DirectTrainOption }) => {
-    const dep = formatClockMinutes(item.departureMinutesFromMidnight);
-    const arr = formatClockMinutes(item.arrivalMinutesFromMidnight);
-    return (
-      <View style={styles.card}>
-        <View style={styles.cardTop}>
-          <View style={styles.directBadge}>
-            <Text style={styles.directBadgeText}>{t('results.directBadge')}</Text>
-          </View>
-          <Text style={styles.totalTime}>
-            {t('results.totalTime', {
-              duration: formatDurationLocalized(item.durationMinutes, t),
-            })}
-          </Text>
-        </View>
-        <View style={styles.legBlock}>
-          <Text style={styles.trainLine} numberOfLines={1}>
-            {item.trainNumber} • {item.trainName}
-          </Text>
-          <Text style={styles.timingLine}>
-            {sourceStation?.code ?? '---'} {dep} → {destinationStation?.code ?? '---'} {arr}
-            {item.arrivalIsoDate !== item.departureIsoDate ? ' (+1d)' : ''}
-          </Text>
-          <Text style={styles.runsLine}>
-            {t('common.runsOn', { days: formatRunningDays(item.runningDays, t) })}
-          </Text>
-        </View>
+        <Text style={styles.directDuration}>
+          {t('results.totalTime', { duration: formatDurationLocalized(item.durationMinutes, t) })}
+        </Text>
       </View>
-    );
-  };
-
-  if (filterMode === 'direct') {
-    return (
-      <FlatList
-        data={displayedDirectTrains}
-        keyExtractor={(item) => `${item.trainNumber}_${item.departureIsoDate}`}
-        renderItem={renderDirectCard}
-        contentContainerStyle={styles.listContent}
-        ListHeaderComponent={headerComponent}
-        ListEmptyComponent={
-          isSearching ? (
-            <View style={styles.emptyBox}>
-              <ActivityIndicator size="large" color="#1D4ED8" />
-              <Text style={[styles.emptyBody, { marginTop: 10 }]}>{t('results.searching')}</Text>
-            </View>
-          ) : (
-            <View style={styles.emptyBox}>
-              <Text style={styles.emptyTitle}>{t('results.noDirectTrainsTitle')}</Text>
-              <Text style={styles.emptyBody}>
-                {t('results.noDirectTrainsBody', { date: formatIsoDateShort(travelDate) })}
-              </Text>
-            </View>
-          )
-        }
-      />
-    );
-  }
+      <Text style={styles.directTrainTitle}>
+        {item.trainNumber} · {item.trainName}
+      </Text>
+      <Text style={styles.directTimings}>
+        {sourceStation?.code ?? '---'} {formatClockMinutes(item.departureMinutesFromMidnight)} →{' '}
+        {destinationStation?.code ?? '---'} {formatClockMinutes(item.arrivalMinutesFromMidnight)}
+        {item.arrivalIsoDate !== item.departureIsoDate ? ` ${t('common.nextDayTag')}` : ''}
+      </Text>
+      <Text style={styles.directRuns}>
+        {t('common.runsOn', { days: formatRunningDays(item.runningDays, t) })}
+      </Text>
+    </View>
+  );
 
   return (
-    <FlatList
-      data={displayedResults}
-      keyExtractor={(item) => item.id}
-      renderItem={renderCard}
-      contentContainerStyle={styles.listContent}
-      ListHeaderComponent={headerComponent}
-      ListEmptyComponent={
-        isSearching ? (
-          <View style={styles.emptyBox}>
-            <ActivityIndicator size="large" color="#1D4ED8" />
-            <Text style={[styles.emptyBody, { marginTop: 10 }]}>{t('results.searching')}</Text>
+    <View style={styles.screen}>
+      <AppHeader
+        title={t('results.routeSummary', {
+          from: sourceStation?.code ?? '---',
+          to: destinationStation?.code ?? '---',
+        })}
+        subtitle={formatIsoDateShort(travelDate)}
+        onBack={() => router.back()}
+        backLabel={t('common.back')}
+        rightSlot={calendarAction}
+      />
+
+      <View style={styles.dayStepper}>
+        <Pressable
+          onPress={() => setTravelDateAndSearch(prevDate)}
+          style={styles.dayStepBtn}
+          accessibilityRole="button"
+        >
+          <MaterialCommunityIcons name="chevron-left" size={18} color={COLORS.primary} />
+          <Text style={styles.dayStepText}>{formatIsoDateShort(prevDate).slice(0, 11)}</Text>
+        </Pressable>
+        <View style={styles.dayCurrent}>
+          <Text style={styles.dayCurrentText}>{formatIsoDateShort(travelDate).slice(0, 11)}</Text>
+        </View>
+        <Pressable
+          onPress={() => setTravelDateAndSearch(nextDate)}
+          style={styles.dayStepBtn}
+          accessibilityRole="button"
+        >
+          <Text style={styles.dayStepText}>{formatIsoDateShort(nextDate).slice(0, 11)}</Text>
+          <MaterialCommunityIcons name="chevron-right" size={18} color={COLORS.primary} />
+        </Pressable>
+      </View>
+
+      {isSearching ? (
+        <ScrollView contentContainerStyle={styles.listContent}>
+          {renderHeaderControls()}
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+        </ScrollView>
+      ) : filterMode === 'direct' ? (
+        <FlatList
+          data={displayedDirectTrains}
+          keyExtractor={(item) => `${item.trainNumber}_${item.departureIsoDate}`}
+          renderItem={renderDirectCard}
+          contentContainerStyle={[
+            styles.listContent,
+            { paddingBottom: Math.max(insets.bottom, SPACING.lg) + SPACING.lg },
+          ]}
+          ListHeaderComponent={renderHeaderControls()}
+          ListEmptyComponent={
+            <EmptyState
+              icon="train-variant"
+              title={t('results.noDirectTrainsTitle')}
+              body={t('results.noDirectTrainsBody', { date: formatIsoDateShort(travelDate) })}
+              actions={[
+                {
+                  label: t('results.tryNearby'),
+                  primary: true,
+                  onPress: () => setFilterMode('all'),
+                },
+              ]}
+            />
+          }
+          ListFooterComponent={<InfoStrip text={t('common.honestyFooter')} />}
+        />
+      ) : (
+        <FlatList
+          data={groupedResults}
+          keyExtractor={(item) => item.primary.id}
+          renderItem={({ item }) => (
+            <TrainCard
+              item={item.primary}
+              similarOptions={item.similar}
+              isSaved={savedIds.has(item.primary.id)}
+              onPress={(opt) =>
+                router.push({
+                  pathname: '/connection/[id]',
+                  params: { id: opt.id },
+                })
+              }
+              onToggleSave={(opt) => {
+                void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                toggleSaveConnection(opt);
+              }}
+            />
+          )}
+          contentContainerStyle={[
+            styles.listContent,
+            { paddingBottom: Math.max(insets.bottom, SPACING.lg) + SPACING.lg },
+          ]}
+          ListHeaderComponent={renderHeaderControls()}
+          ListEmptyComponent={
+            <EmptyState
+              icon="train-variant"
+              title={t('results.noResultsTitle')}
+              body={
+                results.length > 0
+                  ? t('results.noFilterMatchBody')
+                  : t('results.noResultsBody', { date: formatIsoDateShort(travelDate) })
+              }
+              actions={[
+                {
+                  label: t('results.tryNextDay'),
+                  primary: true,
+                  onPress: () => setTravelDateAndSearch(nextDate),
+                },
+                {
+                  label: t('results.tryNearby'),
+                  onPress: () => setFilterMode('all'),
+                },
+              ]}
+            />
+          }
+          ListFooterComponent={<InfoStrip text={t('common.honestyFooter')} />}
+        />
+      )}
+
+      {showDatePicker ? (
+        <DateTimePicker
+          value={parseIsoToLocalDate(travelDate)}
+          mode="date"
+          display={Platform.OS === 'ios' ? 'inline' : 'default'}
+          minimumDate={parseIsoToLocalDate(getTodayIsoDateLocal())}
+          onChange={(_e, selectedDate) => {
+            setShowDatePicker(Platform.OS === 'ios');
+            if (selectedDate) {
+              setTravelDateAndSearch(formatLocalDateToIso(selectedDate));
+            }
+          }}
+        />
+      ) : null}
+
+      <Modal
+        visible={showDirectSheet}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setShowDirectSheet(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.sheet}>
+            <View style={styles.sheetHeader}>
+              <Text style={styles.sheetTitle}>
+                {t('results.directTrainsSheetTitle', { date: formatIsoDateShort(travelDate) })}
+              </Text>
+              <Pressable
+                onPress={() => setShowDirectSheet(false)}
+                style={styles.sheetClose}
+                accessibilityRole="button"
+                accessibilityLabel={t('common.close')}
+              >
+                <MaterialCommunityIcons name="close" size={22} color={COLORS.text} />
+              </Pressable>
+            </View>
+            <ScrollView style={styles.sheetList}>
+              {displayedDirectTrains.map((d) => (
+                <View key={`${d.trainNumber}_${d.departureIsoDate}`} style={styles.sheetItem}>
+                  <Text style={styles.directTrainTitle}>
+                    {d.trainNumber} · {d.trainName}
+                  </Text>
+                  <Text style={styles.directTimings}>
+                    {formatClockMinutes(d.departureMinutesFromMidnight)} →{' '}
+                    {formatClockMinutes(d.arrivalMinutesFromMidnight)} ·{' '}
+                    {formatDurationLocalized(d.durationMinutes, t)}
+                  </Text>
+                </View>
+              ))}
+            </ScrollView>
           </View>
-        ) : (
-          <View style={styles.emptyBox}>
-            <Text style={styles.emptyTitle}>{t('results.noResultsTitle')}</Text>
-            <Text style={styles.emptyBody}>
-              {results.length > 0
-                ? t('results.noFilterMatchBody')
-                : t('results.noResultsBody', { date: formatIsoDateShort(travelDate) })}
-            </Text>
-          </View>
-        )
-      }
-    />
+        </View>
+      </Modal>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  listContent: {
-    padding: 16,
-    paddingBottom: 32,
+  screen: {
+    flex: 1,
+    backgroundColor: COLORS.background,
   },
-  headerBlock: {
-    marginBottom: 12,
+  headerCalBtn: {
+    minWidth: TOUCH_MIN,
+    minHeight: TOUCH_MIN,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  routeBar: {
+  dayStepper: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: 8,
-    marginBottom: 4,
+    backgroundColor: COLORS.surface,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.divider,
+    paddingHorizontal: SPACING.sm,
+    paddingVertical: SPACING.xs,
   },
-  routeSummary: {
-    flex: 1,
-    fontSize: 17,
-    fontWeight: '700',
-    color: '#0F172A',
-  },
-  dateStepperRow: {
+  dayStepBtn: {
+    minHeight: TOUCH_MIN - 8,
     flexDirection: 'row',
-    gap: 6,
+    alignItems: 'center',
+    paddingHorizontal: SPACING.xs,
   },
-  dateStepBtn: {
-    backgroundColor: '#E2E8F0',
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
+  dayStepText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: COLORS.primary,
   },
-  dateStepText: {
+  dayCurrent: {
+    backgroundColor: COLORS.primarySoft,
+    borderRadius: RADII.pill,
+    paddingHorizontal: SPACING.md,
+    paddingVertical: 4,
+  },
+  dayCurrentText: {
     fontSize: 12,
     fontWeight: '700',
-    color: '#0F172A',
+    color: COLORS.primary,
+  },
+  listContent: {
+    padding: SPACING.lg,
+  },
+  controlsHeader: {
+    marginBottom: SPACING.md,
+    gap: SPACING.sm,
+  },
+  summaryRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   countText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#1E40AF',
-  },
-  subNote: {
-    fontSize: 12,
-    color: '#475569',
-    marginTop: 2,
-  },
-  disclaimer: {
-    fontSize: 12,
-    color: '#64748B',
-    marginTop: 2,
-  },
-  profileBadge: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#EEF2FF',
-    borderColor: '#C7D2FE',
-    borderWidth: 1,
-    borderRadius: 6,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    marginTop: 6,
-  },
-  profileBadgeText: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#3730A3',
-  },
-  directNoticeBox: {
-    backgroundColor: '#F0FDF4',
-    borderColor: '#86EFAC',
-    borderWidth: 1,
-    borderRadius: 8,
-    padding: 8,
-    marginTop: 8,
-  },
-  directNoticeText: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#166534',
-  },
-  directBadge: {
-    backgroundColor: '#DCFCE7',
-    borderColor: '#86EFAC',
-    borderWidth: 1,
-    borderRadius: 999,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-  },
-  directBadgeText: {
-    fontSize: 12,
+    fontSize: 15,
     fontWeight: '700',
-    color: '#166534',
+    color: COLORS.text,
   },
-  lateNightBox: {
-    backgroundColor: '#FEF3C7',
-    borderColor: '#F59E0B',
+  clearBtn: {
+    minHeight: 32,
+    justifyContent: 'center',
+    paddingHorizontal: SPACING.sm,
+  },
+  clearBtnText: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: COLORS.primary,
+  },
+  directBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.sm,
+    backgroundColor: '#E6F6EC',
+    borderColor: '#A7DFB9',
     borderWidth: 1,
-    borderRadius: 8,
-    padding: 8,
-    marginTop: 6,
+    borderRadius: RADII.md,
+    paddingHorizontal: SPACING.md,
+    paddingVertical: SPACING.sm + 2,
   },
-  lateNightText: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#92400E',
+  directBannerText: {
+    flex: 1,
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#1B7F3B',
   },
-  cardFooterRow: {
+  chipSection: {
+    gap: SPACING.xs + 2,
+  },
+  chipLabelRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 8,
-    gap: 8,
-  },
-  saveBtn: {
-    backgroundColor: '#F8FAFC',
-    borderColor: '#CBD5E1',
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  saveBtnActive: {
-    backgroundColor: '#DBEAFE',
-    borderColor: '#1D4ED8',
-  },
-  saveBtnText: {
-    fontSize: 12,
-    fontWeight: '700',
-    color: '#334155',
-  },
-  saveBtnTextActive: {
-    color: '#1E40AF',
-  },
-  controlsBlock: {
-    marginTop: 10,
-    gap: 6,
   },
   controlLabel: {
     fontSize: 12,
     fontWeight: '700',
-    color: '#334155',
+    color: COLORS.muted,
+    textTransform: 'uppercase',
+  },
+  scrollHint: {
+    fontSize: 11,
+    color: COLORS.muted,
   },
   chipRow: {
-    gap: 8,
-    paddingBottom: 4,
+    gap: SPACING.sm,
+    paddingHorizontal: 2,
+    paddingVertical: 2,
   },
   chip: {
-    backgroundColor: '#FFFFFF',
-    borderColor: '#CBD5E1',
+    minHeight: TOUCH_MIN - 10,
+    backgroundColor: COLORS.surface,
+    borderColor: COLORS.divider,
     borderWidth: 1,
-    borderRadius: 999,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
+    borderRadius: RADII.pill,
+    paddingHorizontal: SPACING.md,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   chipActive: {
-    backgroundColor: '#DBEAFE',
-    borderColor: '#1D4ED8',
+    backgroundColor: COLORS.primary,
+    borderColor: COLORS.primary,
   },
   chipText: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '600',
-    color: '#334155',
+    color: COLORS.text,
   },
   chipTextActive: {
-    color: '#1E40AF',
-    fontWeight: '700',
+    color: COLORS.white,
   },
-  card: {
-    backgroundColor: '#FFFFFF',
-    borderColor: '#CBD5E1',
+  directCard: {
+    backgroundColor: COLORS.surface,
+    borderColor: COLORS.divider,
     borderWidth: 1,
-    borderRadius: 12,
-    padding: 14,
-    marginBottom: 12,
+    borderRadius: RADII.card,
+    padding: SPACING.lg,
+    marginBottom: SPACING.md,
+    gap: SPACING.xs + 2,
+    ...ELEVATION.subtle,
   },
-  cardTop: {
+  directTop: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: 10,
+    alignItems: 'center',
   },
-  timeSummary: {
-    alignItems: 'flex-end',
+  directPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: '#E6F6EC',
+    borderRadius: RADII.pill,
+    paddingHorizontal: SPACING.sm,
+    paddingVertical: 3,
   },
-  totalTime: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: '#0F172A',
-  },
-  layoverText: {
+  directPillText: {
     fontSize: 12,
-    color: '#475569',
-    marginTop: 2,
-  },
-  legBlock: {
-    paddingVertical: 4,
-  },
-  trainLine: {
-    fontSize: 14,
     fontWeight: '700',
-    color: '#0F172A',
+    color: '#1B7F3B',
   },
-  timingLine: {
+  directDuration: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: COLORS.text,
+  },
+  directTrainTitle: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: COLORS.text,
+  },
+  directTimings: {
     fontSize: 14,
-    color: '#334155',
-    marginTop: 2,
-  },
-  runsLine: {
-    fontSize: 11,
-    color: '#64748B',
-    marginTop: 2,
-  },
-  sameStationBox: {
-    backgroundColor: '#F1F5F9',
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    marginVertical: 8,
-  },
-  sameStationText: {
-    fontSize: 12,
     fontWeight: '600',
-    color: '#334155',
+    color: COLORS.text,
+    fontVariant: ['tabular-nums'],
   },
-  transferBox: {
-    borderRadius: 8,
-    borderWidth: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    marginVertical: 8,
-  },
-  transferChangeBox: {
-    backgroundColor: '#FFFBEB',
-    borderColor: '#F59E0B',
-  },
-  transferUnknownBox: {
-    backgroundColor: '#FEF2F2',
-    borderColor: '#DC2626',
-  },
-  transferWarningTitle: {
+  directRuns: {
     fontSize: 12,
-    fontWeight: '700',
-    color: '#92400E',
+    color: COLORS.muted,
   },
-  transferDetailText: {
-    fontSize: 12,
-    color: '#78350F',
-    marginTop: 2,
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(13, 27, 56, 0.45)',
+    justifyContent: 'flex-end',
   },
-  bufferFoot: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#1E293B',
-    marginTop: 8,
-    paddingTop: 8,
-    borderTopColor: '#E2E8F0',
-    borderTopWidth: 1,
+  sheet: {
+    maxHeight: '70%',
+    backgroundColor: COLORS.surface,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    padding: SPACING.lg,
   },
-  emptyBox: {
-    backgroundColor: '#FFFFFF',
-    borderColor: '#CBD5E1',
-    borderWidth: 1,
-    borderRadius: 12,
-    padding: 20,
-    marginTop: 8,
+  sheetHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: SPACING.md,
   },
-  emptyTitle: {
+  sheetTitle: {
+    flex: 1,
     fontSize: 16,
     fontWeight: '700',
-    color: '#0F172A',
-    marginBottom: 6,
+    color: COLORS.text,
   },
-  emptyBody: {
-    fontSize: 14,
-    color: '#475569',
-    lineHeight: 20,
+  sheetClose: {
+    minWidth: TOUCH_MIN,
+    minHeight: TOUCH_MIN,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  sheetList: {
+    gap: SPACING.sm,
+  },
+  sheetItem: {
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.divider,
+    paddingVertical: SPACING.md,
+    gap: 4,
   },
 });
