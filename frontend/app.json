@@ -5,18 +5,24 @@
     "version": "0.1.0",
     "orientation": "portrait",
     "scheme": "bharatyatra",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
       "backgroundColor": "#0D47A1"
     },
     "android": {
-      "package": "com.bharatyatra.app"
+      "package": "com.bharatyatra.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0D47A1"
+      }
     },
     "plugins": [
       "expo-router",
       "expo-localization",
-      "expo-sqlite",
-      "@react-native-community/datetimepicker"
+      "expo-sqlite"
     ],
     "experiments": {
       "typedRoutes": true

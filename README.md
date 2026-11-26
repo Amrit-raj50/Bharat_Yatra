@@ -1,6 +1,8 @@
-# BharatYatra
-
-**Offline-First 1-Stop Train Connection Planner for Indian Railway Passengers**
+<div align="center">
+  <img src="./docs/logo.png" width="110" alt="BharatYatra Logo" />
+  <h1>BharatYatra</h1>
+  <p><strong>Offline-First 1-Stop Train Connection Planner for Indian Railway Passengers</strong></p>
+</div>
 
 [![Frontend](https://img.shields.io/badge/Mobile-Expo%20SDK%2058%20%7C%20React%20Native-0D47A1?style=flat-square)](./frontend)
 [![Backend](https://img.shields.io/badge/Backend-Node.js%20MVC%20%7C%20MongoDB%20Atlas-1B7F3B?style=flat-square)](./backend)

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   ActivityIndicator,
+  Image,
   Linking,
   Modal,
   Pressable,
@@ -114,9 +115,11 @@ export default function SettingsScreen(): React.ReactElement {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.brandCard}>
-          <View style={styles.brandBadge}>
-            <MaterialCommunityIcons name="train" size={28} color={COLORS.accent} />
-          </View>
+          <Image
+            // eslint-disable-next-line @typescript-eslint/no-require-imports
+            source={require('../../assets/icon.png')}
+            style={styles.brandLogoImg}
+          />
           <View style={styles.brandInfo}>
             <Text style={styles.brandName}>{t('appName')}</Text>
             <Text style={styles.brandTagline}>{t('settings.appTagline')}</Text>
@@ -473,13 +476,10 @@ const styles = StyleSheet.create({
     padding: SPACING.lg,
     ...ELEVATION.subtle,
   },
-  brandBadge: {
+  brandLogoImg: {
     width: 52,
     height: 52,
     borderRadius: 14,
-    backgroundColor: COLORS.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   brandInfo: {
     flex: 1,

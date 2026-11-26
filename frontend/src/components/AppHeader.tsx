@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { COLORS, RADII, SPACING, TOUCH_MIN } from '@/theme/theme';
@@ -47,9 +47,11 @@ export function AppHeader({
               <MaterialCommunityIcons name="arrow-left" size={24} color={COLORS.white} />
             </Pressable>
           ) : showBrandMark ? (
-            <View style={styles.brandMark}>
-              <MaterialCommunityIcons name="train" size={22} color={COLORS.accent} />
-            </View>
+            <Image
+              // eslint-disable-next-line @typescript-eslint/no-require-imports
+              source={require('../../assets/icon.png')}
+              style={styles.brandLogo}
+            />
           ) : null}
           <View style={styles.titleWrap}>
             <Text style={styles.title} numberOfLines={1}>
@@ -93,13 +95,10 @@ const styles = StyleSheet.create({
     marginLeft: -SPACING.sm,
     borderRadius: RADII.pill,
   },
-  brandMark: {
-    width: 34,
-    height: 34,
+  brandLogo: {
+    width: 36,
+    height: 36,
     borderRadius: 10,
-    backgroundColor: COLORS.primaryDark,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   titleWrap: {
     flex: 1,
