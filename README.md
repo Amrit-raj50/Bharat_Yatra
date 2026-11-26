@@ -80,17 +80,131 @@ Bharat_Yatra/
 
 ---
 
-## Live Backend API
+## Live Backend API (Open Public Schedule API)
 
-Deployed on Render: **`https://bharat-yatra-1bdr.onrender.com`**
+**Base URL:** [https://bharat-yatra-1bdr.onrender.com](https://bharat-yatra-1bdr.onrender.com)
 
-| Method | Endpoint | Description |
+Anyone building railway utilities, prototypes, or research tools can query the public BharatYatra API directly (CORS enabled for `*`, JSON responses).  
+*(Note: Hosted on Render free tier — the first request after inactivity may take ~20–30s to wake up.)*
+
+### Quick Endpoint Summary
+
+| Method | Endpoint | Purpose |
 | :--- | :--- | :--- |
 | `GET` | `/health` | Service status, dataset version, and station/train/stop counts |
-| `GET` | `/api/stations?q=LKO&limit=30` | Station autocomplete by code, name, or city |
-| `GET` | `/api/connections?from=LKO&to=JP&date=2026-11-27&extraBuffer=30&limit=100` | 1-stop connection search + direct trains |
-| `GET` | `/api/timetable` | Full timetable JSON payload for offline sync |
-| `POST` | `/api/timetable/import` | Validate and import a ConnectGuard/BharatYatra JSON timetable |
+| `GET` | `/api/stations` | Search Indian Railways stations by code, name, or city |
+| `GET` | `/api/connections` | Find 1-stop train connections, buffer ratings, and direct trains |
+| `GET` | `/api/timetable` | Export the full timetable dataset as JSON |
+| `POST` | `/api/timetable/import` | Validate and import a JSON timetable payload |
+
+---
+
+### Endpoint Details
+
+#### 1. `GET /health`
+Returns server health, active dataset metadata, and record counts.
+
+- **Example:** `https://bharat-yatra-1bdr.onrender.com/health`
+- **Sample Response:**
+```json
+{
+  "status": "ok",
+  "meta": {
+    "datasetKind": "IMPORTED",
+    "dataVersion": "2026.11-IN-DATAMEET",
+    "lastUpdated": "2026-11-26"
+  },
+  "stats": {
+    "stations": 8990,
+    "trains": 5208,
+    "stops": 417080,
+    "clusters": 6,
+    "transfers": 0
+  }
+}
+```
+
+#### 2. `GET /api/stations`
+Autocomplete/search across all **8,990** Indian Railways stations.
+
+- **Query Parameters:**
+  - `q` *(optional, string)* — Station code, station name, or city (e.g., `NDLS`, `Lucknow`).
+  - `limit` *(optional, number, default `30`, max `100`)* — Maximum results returned.
+- **Example:** `https://bharat-yatra-1bdr.onrender.com/api/stations?q=LKO&limit=10`
+- **Sample Response:**
+```json
+{
+  "stations": [
+    {
+      "code": "LKO",
+      "name": "LUCKNOW",
+      "city": "LUCKNOW",
+      "lat": 26.8318,
+      "lng": 80.9191,
+      "cityClusterId": null
+    }
+  ]
+}
+```
+
+#### 3. `GET /api/connections`
+Finds 1-stop train-to-train connections (sorted fastest-first) plus direct trains on the same date.
+
+- **Query Parameters:**
+  - `from` *(required, string)* — Origin station code (e.g., `LKO`).
+  - `to` *(required, string)* — Destination station code (e.g., `JP`).
+  - `date` *(optional, `YYYY-MM-DD`, defaults to today UTC)* — Travel date in IST.
+  - `extraBuffer` *(optional, number, default `0`)* — Extra traveller safety margin in minutes (`0`, `30`, `45`).
+  - `limit` *(optional, number, max `500`)* — Cap number of `connections` returned (recommended for mobile/web clients; `totalCount` still reports the full match count).
+- **Example:** `https://bharat-yatra-1bdr.onrender.com/api/connections?from=LKO&to=JP&date=2026-11-27&extraBuffer=30&limit=20`
+- **Sample Response:**
+```json
+{
+  "from": "LKO",
+  "to": "JP",
+  "date": "2026-11-27",
+  "count": 20,
+  "totalCount": 79482,
+  "disclaimer": "Schedule-based estimate only; not live NTES/IRCTC status.",
+  "directTrains": [
+    {
+      "trainNumber": "14865",
+      "trainName": "MARUDHAR EXP",
+      "departureIsoDate": "2026-11-27",
+      "departureMinutesFromMidnight": 15,
+      "arrivalIsoDate": "2026-11-27",
+      "arrivalMinutesFromMidnight": 735,
+      "durationMinutes": 720
+    }
+  ],
+  "connections": [
+    {
+      "id": "12003_TDL_TDL_12307_2026-11-27",
+      "isStationChange": false,
+      "layoverMinutes": 8,
+      "transferMinutes": 0,
+      "effectiveBufferMinutes": -22,
+      "totalJourneyMinutes": 510,
+      "rating": "TIGHT",
+      "ratingIsEstimate": true,
+      "isLateNightTransfer": false,
+      "leg1": { "...": "Origin -> Hub details" },
+      "leg2": { "...": "Hub -> Destination details" }
+    }
+  ]
+}
+```
+
+#### 4. `GET /api/timetable`
+Exports the entire timetable dataset (`meta`, `cityClusters`, `stations`, `trains`, `trainStops`, `stationTransfers`) in BharatYatra JSON format for offline apps or local mirroring.
+
+- **Example:** `https://bharat-yatra-1bdr.onrender.com/api/timetable`
+
+#### 5. `POST /api/timetable/import`
+Validates and imports a JSON timetable payload (`stations`, `trains`, `trainStops` arrays required; max body 25 MB).
+
+- **Content-Type:** `application/json`
+- **Response:** `{ "ok": true, "imported": { "stations": ..., "trains": ..., "stops": ... } }`
 
 ---
 
