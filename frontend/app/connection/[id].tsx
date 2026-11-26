@@ -65,7 +65,7 @@ export default function ConnectionDetailScreen(): React.ReactElement {
               {
                 label: t('saved.goPlan'),
                 primary: true,
-                onPress: () => router.push('/(tabs)/index'),
+                onPress: () => router.push('/(tabs)'),
               },
             ]}
           />

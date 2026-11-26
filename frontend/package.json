@@ -1,6 +1,6 @@
 {
   "name": "bharatyatra",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "BharatYatra — Offline-first train-to-train connection planner for Indian Railway passengers",
   "main": "expo-router/entry",
   "scripts": {

@@ -2,7 +2,7 @@
   "expo": {
     "name": "BharatYatra",
     "slug": "bharatyatra",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "orientation": "portrait",
     "scheme": "bharatyatra",
     "icon": "./assets/icon.png",
@@ -14,6 +14,7 @@
     },
     "android": {
       "package": "com.bharatyatra.app",
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0D47A1"

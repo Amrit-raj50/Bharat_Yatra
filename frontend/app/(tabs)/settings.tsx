@@ -123,7 +123,7 @@ export default function SettingsScreen(): React.ReactElement {
           <View style={styles.brandInfo}>
             <Text style={styles.brandName}>{t('appName')}</Text>
             <Text style={styles.brandTagline}>{t('settings.appTagline')}</Text>
-            <Text style={styles.versionText}>{t('settings.version', { version: '0.1.0' })}</Text>
+            <Text style={styles.versionText}>{t('settings.version', { version: '0.1.1' })}</Text>
           </View>
         </View>
 
