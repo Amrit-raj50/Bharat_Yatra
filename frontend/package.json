@@ -1,7 +1,7 @@
 {
-  "name": "connectguard",
+  "name": "bharatyatra",
   "version": "0.1.0",
-  "description": "Offline-first train-to-train connection planner for Indian Railway passengers",
+  "description": "BharatYatra — Offline-first train-to-train connection planner for Indian Railway passengers",
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
@@ -16,8 +16,11 @@
   },
   "private": true,
   "dependencies": {
+    "@expo/vector-icons": "^15.0.2",
+    "@react-native-community/datetimepicker": "9.2.1",
     "expo": "~58.0.26",
     "expo-constants": "~58.0.16",
+    "expo-haptics": "~58.0.8",
     "expo-linking": "~58.0.17",
     "expo-localization": "~58.0.5",
     "expo-router": "~58.0.32",

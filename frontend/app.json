@@ -1,18 +1,22 @@
 {
   "expo": {
-    "name": "ConnectGuard",
-    "slug": "connectguard",
+    "name": "BharatYatra",
+    "slug": "bharatyatra",
     "version": "0.1.0",
     "orientation": "portrait",
-    "scheme": "connectguard",
+    "scheme": "bharatyatra",
     "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#0D47A1"
+    },
     "android": {
-      "package": "com.connectguard.app"
+      "package": "com.bharatyatra.app"
     },
     "plugins": [
       "expo-router",
       "expo-localization",
-      "expo-sqlite"
+      "expo-sqlite",
+      "@react-native-community/datetimepicker"
     ],
     "experiments": {
       "typedRoutes": true
