@@ -1,4 +1,3 @@
-import { Platform } from 'react-native';
 import type { ConnectionOption, DatasetMeta, DirectTrainOption, Station } from '@/domain/types';
 
 export interface BackendHealthResponse {
@@ -27,7 +26,7 @@ export function getDefaultApiBaseUrl(): string {
   if (envUrl && envUrl.trim()) {
     return envUrl.trim().replace(/\/+$/, '');
   }
-  return Platform.OS === 'web' ? 'http://localhost:4000' : 'http://192.168.31.199:4000';
+  return 'https://bharat-yatra-1bdr.onrender.com';
 }
 
 async function fetchJsonWithTimeout<T>(url: string, timeoutMs = 8000): Promise<T> {

@@ -111,7 +111,7 @@ export default function SettingsScreen(): React.ReactElement {
           style={styles.input}
           value={apiInput}
           onChangeText={setApiInput}
-          placeholder="http://192.168.31.199:4000"
+          placeholder="https://bharat-yatra-1bdr.onrender.com"
           placeholderTextColor="#64748B"
           autoCapitalize="none"
           autoCorrect={false}
