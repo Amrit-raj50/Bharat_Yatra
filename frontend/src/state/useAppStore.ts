@@ -61,9 +61,19 @@ interface AppState {
   results: ConnectionOption[];
   directTrains: DirectTrainOption[];
   savedConnections: ConnectionOption[];
+  howItWorksDismissed: boolean;
+  issueReportsCount: number;
   hasSearched: boolean;
   bootstrap: () => void;
-  refreshRemoteMeta: () => Promise<void>;
+  refreshRemoteMeta: () => Promise<boolean>;
+  dismissHowItWorks: () => void;
+  clearRecentSearches: () => void;
+  submitIssueReport: (report: {
+    trainNumber: string;
+    stationCode: string;
+    date: string;
+    comment: string;
+  }) => void;
   setApiBaseUrl: (url: string) => void;
   setLanguage: (lang: SupportedLanguage) => void;
   setBufferProfile: (profile: BufferProfile) => void;
@@ -173,6 +183,8 @@ export const useAppStore = create<AppState>((set, get) => ({
   results: [],
   directTrains: [],
   savedConnections: [],
+  howItWorksDismissed: false,
+  issueReportsCount: 0,
   hasSearched: false,
 
   bootstrap: () => {
@@ -193,6 +205,17 @@ export const useAppStore = create<AppState>((set, get) => ({
       const savedConnections = repo.getSavedConnections();
       const savedApiUrl = repo.getPreference('api_base_url');
       const apiBaseUrl = savedApiUrl?.trim() || getDefaultApiBaseUrl();
+      const howItWorksDismissed = repo.getPreference('how_it_works_dismissed') === '1';
+      let issueReportsCount = 0;
+      try {
+        const rawReports = repo.getPreference('issue_reports');
+        if (rawReports) {
+          const parsed = JSON.parse(rawReports);
+          if (Array.isArray(parsed)) issueReportsCount = parsed.length;
+        }
+      } catch {
+        issueReportsCount = 0;
+      }
 
       initI18n(language);
 
@@ -215,6 +238,8 @@ export const useAppStore = create<AppState>((set, get) => ({
         bufferProfile,
         apiBaseUrl,
         savedConnections,
+        howItWorksDismissed,
+        issueReportsCount,
         sourceStation: get().sourceStation ?? defaultFrom,
         destinationStation: get().destinationStation ?? defaultTo,
       });
@@ -256,10 +281,48 @@ export const useAppStore = create<AppState>((set, get) => ({
           datasetStats: health.stats,
           dataSource: 'ONLINE_API',
         });
+        return true;
+      }
+      return false;
+    } catch {
+      return false;
+    }
+  },
+
+  dismissHowItWorks: () => {
+    try {
+      getRepoOrNull()?.setPreference('how_it_works_dismissed', '1');
+    } catch {
+      // Ignore persistence failure
+    }
+    set({ howItWorksDismissed: true });
+  },
+
+  clearRecentSearches: () => {
+    try {
+      getRepoOrNull()?.setPreference('recentSearches', '[]');
+    } catch {
+      // Ignore persistence failure
+    }
+    set({ recentSearches: [] });
+  },
+
+  submitIssueReport: (report) => {
+    const entry = { ...report, createdAt: new Date().toISOString() };
+    let nextCount = get().issueReportsCount + 1;
+    try {
+      const repo = getRepoOrNull();
+      if (repo) {
+        const raw = repo.getPreference('issue_reports');
+        const list = raw ? (JSON.parse(raw) as unknown[]) : [];
+        const updated = Array.isArray(list) ? [entry, ...list] : [entry];
+        repo.setPreference('issue_reports', JSON.stringify(updated));
+        nextCount = updated.length;
       }
     } catch {
-      // Offline or backend unreachable: keep local SQLite metadata
+      // Keep in-memory count
     }
+    set({ issueReportsCount: nextCount });
   },
 
   setApiBaseUrl: (url) => {
