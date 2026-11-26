@@ -8,6 +8,11 @@
 [![Backend](https://img.shields.io/badge/Backend-Node.js%20MVC%20%7C%20MongoDB%20Atlas-1B7F3B?style=flat-square)](./backend)
 [![Dataset](https://img.shields.io/badge/Timetable-8%2C990%20Stations%20%7C%205%2C208%20Trains-F57C00?style=flat-square)](./docs/DATA_FORMAT.md)
 [![Languages](https://img.shields.io/badge/Languages-English%20%7C%20%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80-08306B?style=flat-square)](./frontend/src/i18n)
+[![Android APK](https://img.shields.io/badge/Download-Android%20APK%20(v0.1.1)-1B7F3B?style=flat-square&logo=android&logoColor=white)](https://expo.dev/accounts/baby_coda_69/projects/bharatyatra/builds/d20da46a-a16d-4b1e-a77c-e7445e672ac6)
+
+## Download Android App
+
+- **Android APK (v0.1.1):** [Download from Expo EAS Build](https://expo.dev/accounts/baby_coda_69/projects/bharatyatra/builds/d20da46a-a16d-4b1e-a77c-e7445e672ac6) *(install directly on Android; connects automatically to the live BharatYatra backend)*
 
 > **Official Notice & Scope Disclaimer:**
 > **BharatYatra** is a **pre-booking schedule planning utility** for passengers travelling on **two separate tickets** when direct trains are unavailable or waitlisted. It does **not** book tickets, display seat availability, track coach positions, or provide live train running status. All buffer ratings (`Tight`, `OK`, `Comfortable`, `Too long`, `Transfer time unknown`) are **rule-based schedule estimates**, never probabilities or live delay guarantees. Always verify live running status and book tickets on official Indian Railways platforms (**IRCTC**, **NTES**, **RailOne**).
